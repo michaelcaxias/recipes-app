@@ -11,10 +11,9 @@ export default function Header({ title, searchButton = true }) {
   const searchButtonElement = (
     <button
       type="button"
-      data-testid="search-top-btn"
       onClick={ () => setIsVisible(!isVisible) }
     >
-      <img src={ searchIcon } alt="search" />
+      <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
     </button>
   );
   return (
@@ -22,10 +21,9 @@ export default function Header({ title, searchButton = true }) {
       <header>
         <button
           type="button"
-          data-testid="profile-top-btn"
           onClick={ () => history.push('/perfil') }
         >
-          <img src={ profileIcon } alt="profile" />
+          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
         </button>
         <h1 data-testid="page-title">{ title }</h1>
         { searchButton && searchButtonElement }
