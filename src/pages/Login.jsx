@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
-export default function Login({ history }) {
+export default function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,9 +44,3 @@ export default function Login({ history }) {
     </form>
   );
 }
-
-Login.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func.isRequired,
-  }).isRequired,
-};
