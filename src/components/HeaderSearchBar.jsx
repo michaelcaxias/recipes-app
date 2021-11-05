@@ -15,6 +15,7 @@ export default function HeaderSearchBar() {
         Busca por Ingredientes:
         <input
           type="radio"
+          name="radio-filter"
           data-testid="ingredient-search-radio"
           id="ingredient-radio"
         />
@@ -24,6 +25,7 @@ export default function HeaderSearchBar() {
         <input
           type="radio"
           data-testid="name-search-radio"
+          name="radio-filter"
           id="name-radio"
         />
       </label>
@@ -32,6 +34,7 @@ export default function HeaderSearchBar() {
         <input
           type="radio"
           data-testid="first-letter-search-radio"
+          name="radio-filter"
           id="first-letter-radio"
         />
       </label>
