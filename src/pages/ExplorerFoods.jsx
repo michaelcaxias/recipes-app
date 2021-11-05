@@ -2,5 +2,9 @@ import React from 'react';
 import Header from '../components/Header';
 
 export default function ExplorerFoods() {
-  return <Header title="Explorar Comidas" searchButton={ false } />;
+  return (
+    <section>
+      <Header title="Explorar Comidas" searchButton={ false } />
+    </section>
+  );
 }
