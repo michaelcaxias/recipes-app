@@ -1,10 +1,18 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-export default function Login() {
+export default function Login({ history }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const isEmailValid = (emailCheck) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailCheck);
+
+  const setLocalStorage = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    const objectEmail = { email };
+    localStorage.setItem('user', JSON.stringify(objectEmail));
+  };
 
   const MAX_LENGTH = 6;
   const disabled = password.length > MAX_LENGTH && isEmailValid(email);
@@ -26,6 +34,7 @@ export default function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ !disabled }
+        onClick={ setLocalStorage }
       >
         Entrar
 
@@ -33,4 +42,9 @@ export default function Login() {
     </form>
   );
 }
-// regex validação email: /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
