@@ -4,7 +4,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const isEmailValid = (Email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(Email);
+  const isEmailValid = (emailCheck) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailCheck);
 
   const MAX_LENGTH = 6;
   const disabled = password.length > MAX_LENGTH && isEmailValid(email);
