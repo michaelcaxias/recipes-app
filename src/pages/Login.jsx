@@ -12,6 +12,7 @@ export default function Login({ history }) {
     localStorage.setItem('cocktailsToken', '1');
     const objectEmail = { email };
     localStorage.setItem('user', JSON.stringify(objectEmail));
+    history.push('/comidas');
   };
 
   const MAX_LENGTH = 6;
