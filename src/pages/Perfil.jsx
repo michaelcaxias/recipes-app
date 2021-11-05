@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function Perfil() {
-  return <h1>Perfil</h1>;
+  return <Header title="Perfil" searchButton={ false } />;
 }

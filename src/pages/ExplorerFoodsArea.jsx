@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function ExplorerFoodsArea() {
-  return <h1>ExplorerFoodsArea</h1>;
+  return <Header title="Explorar Origem" />;
 }

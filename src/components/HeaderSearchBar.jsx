@@ -3,6 +3,14 @@ import React from 'react';
 export default function HeaderSearchBar() {
   return (
     <header>
+      <label htmlFor="search-input">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search"
+          data-testid="search-input"
+        />
+      </label>
       <label htmlFor="ingredient-radio">
         Busca por Ingredientes:
         <input

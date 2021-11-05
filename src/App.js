@@ -14,6 +14,10 @@ import Drinks from './pages/Drinks';
 import ExplorerFoods from './pages/ExplorerFoods';
 import ExplorerDrinks from './pages/ExplorerDrinks';
 import ExplorerFoodsArea from './pages/ExplorerFoodsArea';
+import DrinksId from './pages/DrinksId';
+import FoodId from './pages/FoodId';
+import FoodInProgress from './pages/FoodInProgress';
+import DrinksInProgress from './pages/DrinksInProgress';
 
 function App() {
   return (
@@ -21,11 +25,11 @@ function App() {
       <Switch>
         <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
-        {/* <Route path="/comidas/:id/in-progress" component={} /> */}
-        {/* <Route path="/bebidas/:id/in-progress" component={} /> */}
+        <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
         <Route path="/explorar/comidas/area" component={ ExplorerFoodsArea } />
-        {/* <Route path="/comidas/:id" component={} />  */}
-        {/* <Route path="/bebidas/:id" component={} /> */}
+        <Route path="/comidas/:id" component={ FoodId } />
+        <Route path="/bebidas/:id" component={ DrinksId } />
         <Route path="/explorar/comidas" component={ ExplorerFoods } />
         <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
         <Route path="/comidas" component={ FoodRecipes } />

@@ -1,5 +1,6 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function FavoriteRecipes() {
-  return <h1>FavoriteRecipes</h1>;
+  return <Header title="Receitas Favoritas" searchButton={ false } />;
 }
