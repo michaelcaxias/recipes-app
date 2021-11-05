@@ -13,6 +13,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import Drinks from './pages/Drinks';
 import ExplorerFoods from './pages/ExplorerFoods';
 import ExplorerDrinks from './pages/ExplorerDrinks';
+import ExplorerFoodsArea from './pages/ExplorerFoodsArea';
 
 function App() {
   return (
@@ -20,11 +21,11 @@ function App() {
       <Switch>
         <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
         <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
-        {/* <Route path="/comidas/:id/in-progress" component={} />  <- nesse não tem header */}
-        {/* <Route path="/bebidas/:id/in-progress" component={} /> <- nesse não tem header */}
-        {/* <Route path="/explorar/comidas/area" component={} /> */}
-        {/* <Route path="/comidas/:id" component={} /> <- nesse não tem header */}
-        {/* <Route path="/bebidas/:id" component={} /> <- nesse não tem header */}
+        {/* <Route path="/comidas/:id/in-progress" component={} /> */}
+        {/* <Route path="/bebidas/:id/in-progress" component={} /> */}
+        <Route path="/explorar/comidas/area" component={ ExplorerFoodsArea } />
+        {/* <Route path="/comidas/:id" component={} />  */}
+        {/* <Route path="/bebidas/:id" component={} /> */}
         <Route path="/explorar/comidas" component={ ExplorerFoods } />
         <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
         <Route path="/comidas" component={ FoodRecipes } />
