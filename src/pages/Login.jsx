@@ -26,12 +26,14 @@ export default function Login() {
           type="email"
           data-testid="email-input"
           value={ email }
+          placeholder="Email"
           onChange={ ({ target: { value } }) => setEmail(value) }
         />
         <input
           type="password"
           data-testid="password-input"
           value={ password }
+          placeholder="Senha"
           onChange={ ({ target: { value } }) => setPassword(value) }
         />
         <button
