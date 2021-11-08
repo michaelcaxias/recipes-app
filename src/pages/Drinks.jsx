@@ -1,5 +1,5 @@
-import FooterMenu from '../components/FooterMenu';
 import React, { useContext } from 'react';
+import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import recipesContext from '../context/recipesContext';
