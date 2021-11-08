@@ -1,12 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 export default function RecipeCard({ image, index, name }) {
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-      <img src={ image } data-testid={ `${index}-card-img` } alt="" />
-      <h1 data-testid={ `${index}-card-name` }>{ name }</h1>
-    </div>
+    <Card style={ { width: '18rem' } } data-testid={ `${index}-recipe-card` }>
+      <Card.Img data-testid={ `${index}-card-img` } variant="top" src={ image } />
+      <Card.Body>
+        <Card.Title data-testid={ `${index}-card-name` }>{name}</Card.Title>
+      </Card.Body>
+    </Card>
   );
 }
 
