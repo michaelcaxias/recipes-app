@@ -40,10 +40,10 @@ export default function RecipesContextProvider({ children }) {
       fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`);
     }
     if (searchFor === 'ingredient') {
-      fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${query}`);
+      fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`);
     }
     if (searchFor === 'name') {
-      fetchAPI(`https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`);
+      fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`);
     }
   };
 
