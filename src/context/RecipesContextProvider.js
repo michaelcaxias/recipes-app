@@ -7,18 +7,23 @@ export default function RecipesContextProvider({ children }) {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
   const [page, setPage] = useState('food');
 
   const fetchAPI = async (url) => {
     const response = await fetch(url);
     const resolve = await response.json();
-    setData(resolve);
-    if (page === 'food' && resolve.meals.length === 1) {
-      history.push(`/comidas/${resolve.meals[0].idMeal}`);
+    if (page === 'food') {
+      setData(resolve.meals);
+      if (resolve.meals.length === 1) {
+        history.push(`/comidas/${resolve.meals[0].idMeal}`);
+      }
     }
-    if (page === 'drink' && resolve.drinks.length === 1) {
-      history.push(`/bebidas/${resolve.drinks[0].idDrink}`);
+    if (page === 'drink') {
+      setData(resolve.drinks);
+      if (resolve.drinks.length === 1) {
+        history.push(`/bebidas/${resolve.drinks[0].idDrink}`);
+      }
     }
   };
 
