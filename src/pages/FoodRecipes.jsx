@@ -1,4 +1,5 @@
 import React from 'react';
+import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 
 export default function FoodRecipes() {
@@ -6,6 +7,7 @@ export default function FoodRecipes() {
     <div>
       <Header title="Comidas" />
       Receitas de comida
+      <FooterMenu />
     </div>
   );
 }
