@@ -1,6 +1,12 @@
 import React from 'react';
+import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 
 export default function Explorer() {
-  return <Header title="Explorar" searchButton={ false } />;
+  return (
+    <section>
+      <Header title="Explorar" searchButton={ false } />
+      <FooterMenu />
+    </section>
+  );
 }

@@ -1,3 +1,4 @@
+import FooterMenu from '../components/FooterMenu';
 import React, { useContext } from 'react';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -9,7 +10,7 @@ export default function Drinks() {
   const { data } = useContext(recipesContext);
   const recipes = data ? data.slice(0, MAX_RECIPES) : [];
   return (
-    <div>
+    <section>
       <Header title="Bebidas" />
       { recipes.map(({ strDrinkThumb, strDrink }, index) => (
         <RecipeCard
@@ -19,6 +20,7 @@ export default function Drinks() {
           name={ strDrink }
         />
       )) }
-    </div>
+      <FooterMenu />
+    </section>
   );
 }

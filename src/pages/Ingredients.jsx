@@ -1,10 +1,12 @@
 import React from 'react';
+import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 
 export default function Ingredients() {
   return (
-    <div>
+    <section>
       <Header title="Explorar Ingredientes" searchButton={ false } />
-    </div>
+      <FooterMenu />
+    </section>
   );
 }
