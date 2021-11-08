@@ -27,3 +27,5 @@ export default function useFetch(URL, MOCK) {
 
   return [data, isLoading, serverError];
 }
+
+// const [ data ] = useFetch(URL, MOCK)
