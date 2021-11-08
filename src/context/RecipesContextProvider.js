@@ -15,13 +15,17 @@ export default function RecipesContextProvider({ children }) {
     const resolve = await response.json();
     if (page === 'food') {
       setData(resolve.meals);
-      if (resolve.meals.length === 1) {
+      if (resolve.meals === null) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      } else if (resolve.meals.length === 1) {
         history.push(`/comidas/${resolve.meals[0].idMeal}`);
       }
     }
     if (page === 'drink') {
       setData(resolve.drinks);
-      if (resolve.drinks.length === 1) {
+      if (resolve.drinks === null) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      } else if (resolve.drinks.length === 1) {
         history.push(`/bebidas/${resolve.drinks[0].idDrink}`);
       }
     }

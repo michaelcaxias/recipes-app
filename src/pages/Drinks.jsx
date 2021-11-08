@@ -7,10 +7,11 @@ const MAX_RECIPES = 12;
 
 export default function Drinks() {
   const { data } = useContext(recipesContext);
+  const recipes = data ? data.slice(0, MAX_RECIPES) : [];
   return (
     <div>
       <Header title="Bebidas" />
-      { data.slice(0, MAX_RECIPES).map(({ strDrinkThumb, strDrink }, index) => (
+      { recipes.map(({ strDrinkThumb, strDrink }, index) => (
         <RecipeCard
           key={ index }
           image={ strDrinkThumb }
