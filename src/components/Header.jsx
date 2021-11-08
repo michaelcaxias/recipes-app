@@ -4,6 +4,7 @@ import { useHistory } from 'react-router';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import HeaderSearchBar from './HeaderSearchBar';
+import '../styles/header.css';
 
 export default function Header({ title, searchButton = true }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -18,7 +19,7 @@ export default function Header({ title, searchButton = true }) {
   );
   return (
     <>
-      <header>
+      <header className="header">
         <button
           type="button"
           onClick={ () => history.push('/perfil') }
