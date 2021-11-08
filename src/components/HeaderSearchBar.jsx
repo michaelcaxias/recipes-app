@@ -38,13 +38,13 @@ export default function HeaderSearchBar() {
           id="first-letter-radio"
         />
       </label>
-      <label htmlFor="search-btn">
-        <input
-          type="button"
-          data-testid="exec-search-btn"
-          id="search-btn"
-        />
-      </label>
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        id="search-btn"
+      >
+        Buscar
+      </button>
     </header>
   );
 }
