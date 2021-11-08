@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import recipesContext from './recipesContext';
 
 export default function RecipesContextProvider({ children }) {
   const { pathname } = useLocation();
+  const history = useHistory();
 
   const [data, setData] = useState({});
   const [page, setPage] = useState('food');
@@ -13,6 +14,12 @@ export default function RecipesContextProvider({ children }) {
     const response = await fetch(url);
     const resolve = await response.json();
     setData(resolve);
+    if (page === 'food' && resolve.meals.length === 1) {
+      history.push(`/comidas/${resolve.meals[0].idMeal}`);
+    }
+    if (page === 'drink' && resolve.drinks.length === 1) {
+      history.push(`/bebidas/${resolve.drinks[0].idDrink}`);
+    }
   };
 
   const filterByFoods = (state) => {
