@@ -1,0 +1,14 @@
+@media screen and ( max-width : 360px ) {
+
+  .header {
+    background-color: rgb(218, 218, 218);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .header button {
+    background-color: transparent;
+    border: none;
+  }
+
+}
