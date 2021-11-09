@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import wave from '../images/wave';
 import '../styles/login.css';
 
 export default function Login() {
@@ -45,6 +46,11 @@ export default function Login() {
           Entrar
         </button>
       </form>
+      <div className="custom-shape-divider-bottom-1636461259">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d={ wave } className="shape-fill" />
+        </svg>
+      </div>
     </section>
   );
 }
