@@ -66,6 +66,7 @@ export default function RecipesContextProvider({ children }) {
   const context = {
     page,
     data,
+    setData,
     setPage,
     filterByFoods,
     filterByDrinks,
