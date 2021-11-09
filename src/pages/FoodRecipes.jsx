@@ -1,34 +1,36 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useContext } from 'react';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import requestRecipes from '../helpers/requestRecipes';
-// import recipesContext from '../context/recipesContext';
+import recipesContext from '../context/recipesContext';
+import '../styles/foodAndDrinks.css';
 
 const MAX_RECIPES = 12;
-const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=miscellaneous';
+const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const key = 'meals';
 
 export default function FoodRecipes() {
-  const [meals, setMeals] = useState([]);
+  const { data, setData } = useContext(recipesContext);
   useEffect(() => {
-    requestRecipes(url, setMeals, key);
+    requestRecipes(url, data, setData, key);
   }, []);
 
-  // const { data } = useContext(recipesContext);
-  const recipes = meals ? meals.slice(0, MAX_RECIPES) : [];
   return (
     <section>
       <Header title="Comidas" />
       Receitas de comida
-      { recipes.map(({ strMealThumb, strMeal }, index) => (
-        <RecipeCard
-          key={ index }
-          image={ strMealThumb }
-          index={ index }
-          name={ strMeal }
-        />
-      )) }
+      <section className="cards-container">
+        { data && data.slice(0, MAX_RECIPES).map(({ strMealThumb, strMeal }, index) => (
+          <RecipeCard
+            key={ index }
+            image={ strMealThumb }
+            index={ index }
+            name={ strMeal }
+          />
+        )) }
+      </section>
       <FooterMenu />
     </section>
   );

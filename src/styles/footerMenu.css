@@ -1,10 +1,15 @@
 footer {
   align-items: center;
-  background-color: brown;
+  background-color: rgb(255, 153, 153);
   bottom: 0;
   display: flex;
   justify-content: space-around;
   padding: 1em;
   position: fixed;
   width: 100%;
+}
+
+footer button {
+  background-color: transparent;
+  border: none;
 }
