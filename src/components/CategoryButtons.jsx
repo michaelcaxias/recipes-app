@@ -20,3 +20,4 @@ export default function CategoryButtons() {
         <button type="button" key={ idCategory }>{strCategory}</button>))}
     </section>
   );
+}

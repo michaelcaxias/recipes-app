@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import CategoryButtons from '../components/CategoryButtons';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
@@ -14,8 +14,8 @@ const key = 'meals';
 export default function FoodRecipes() {
   const { data, setData } = useContext(recipesContext);
   useEffect(() => {
-    requestRecipes(url, meals, setMeals, key);
-  }, [])
+    requestRecipes(url, data, setData, key);
+  }, []);
   return (
     <section>
       <Header title="Comidas" />
