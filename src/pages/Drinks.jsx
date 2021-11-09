@@ -7,7 +7,7 @@ import recipesContext from '../context/recipesContext';
 import requestRecipes from '../helpers/requestRecipes';
 
 const MAX_RECIPES = 12;
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Cocktail';
+const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const key = 'drinks';
 
 export default function Drinks() {

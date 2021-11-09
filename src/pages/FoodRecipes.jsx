@@ -7,7 +7,7 @@ import requestRecipes from '../helpers/requestRecipes';
 import recipesContext from '../context/recipesContext';
 
 const MAX_RECIPES = 12;
-const url = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=miscellaneous';
+const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const key = 'meals';
 
 export default function FoodRecipes() {
