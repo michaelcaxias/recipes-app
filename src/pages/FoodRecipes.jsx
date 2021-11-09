@@ -13,7 +13,7 @@ const key = 'meals';
 export default function FoodRecipes() {
   const { data, setData } = useContext(recipesContext);
   useEffect(() => {
-    requestRecipes(url, setData, key);
+    requestRecipes(url, data, setData, key);
   }, []);
 
   const recipes = data ? data.slice(0, MAX_RECIPES) : [];

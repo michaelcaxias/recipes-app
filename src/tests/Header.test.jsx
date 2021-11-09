@@ -2,9 +2,11 @@ import { screen } from '@testing-library/react';
 import React from 'react';
 import Header from '../components/Header';
 import renderWithRouter from './renderWithRouter';
+import FoodRecipes from '../components/Fo'
 
 const dataBtnSearchIcon = 'search-top-btn';
 const dataBtnProfile = 'profile-top-btn';
+const dataTitulo = 'page-title;';
 
 describe('Testando Header.js', () => {
   test('se elementos do Header estão na tela', () => {
@@ -13,5 +15,11 @@ describe('Testando Header.js', () => {
     const btnProfile = screen.getByTestId(dataBtnProfile);
     expect(btnSearch).toBeInTheDocument();
     expect(btnProfile).toBeInTheDocument();
+  });
+
+  test('se o titulo muda de acordo com a rota', () => {
+    renderWithRouter(<FoodRecipes />);
+    const tituloComidas = screen.getByTestId(dataTitulo);
+    expect(tituloComidas).toBeInTheDocument();
   });
 });

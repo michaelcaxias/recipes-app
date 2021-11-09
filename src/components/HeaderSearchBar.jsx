@@ -37,7 +37,7 @@ export default function HeaderSearchBar() {
       </label>
       <section>
         <label htmlFor="ingredient-radio">
-          Busca por Ingredientes:
+          Ingrediente
           <input
             type="radio"
             name="searchFor"
@@ -48,7 +48,7 @@ export default function HeaderSearchBar() {
           />
         </label>
         <label htmlFor="name-radio">
-          Busca por Nome:
+          Nome
           <input
             type="radio"
             data-testid="name-search-radio"
@@ -59,7 +59,7 @@ export default function HeaderSearchBar() {
           />
         </label>
         <label htmlFor="first-letter-radio">
-          Busca por primeira letra:
+          Primeira Letra
           <input
             type="radio"
             data-testid="first-letter-search-radio"

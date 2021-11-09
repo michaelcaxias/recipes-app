@@ -14,7 +14,7 @@ export default function Drinks() {
   const { data, setData } = useContext(recipesContext);
 
   useEffect(() => {
-    requestRecipes(url, setData, key);
+    requestRecipes(url, data, setData, key);
   }, []);
 
   const recipes = data ? data.slice(0, MAX_RECIPES) : [];
