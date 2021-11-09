@@ -124,7 +124,6 @@ describe('Na página de login', () => {
     userEvent.type(emailInput, email);
     userEvent.type(passwordInput, password);
     loginButton.click();
-    loginButton.click();
 
     expect(history.location.pathname).toBe('/comidas');
   });
