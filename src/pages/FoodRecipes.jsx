@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import CategoryButtons from '../components/CategoryButtons';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -12,7 +13,7 @@ const key = 'meals';
 export default function FoodRecipes() {
   const [meals, setMeals] = useState([]);
   useEffect(() => {
-    requestRecipes(url, setMeals, key);
+    requestRecipes(url, meals, setMeals, key);
   }, []);
 
   // const { data } = useContext(recipesContext);
@@ -20,7 +21,7 @@ export default function FoodRecipes() {
   return (
     <section>
       <Header title="Comidas" />
-      Receitas de comida
+      <CategoryButtons />
       { recipes.map(({ strMealThumb, strMeal }, index) => (
         <RecipeCard
           key={ index }

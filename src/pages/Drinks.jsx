@@ -12,7 +12,7 @@ const key = 'drinks';
 export default function Drinks() {
   const [drinks, setDrinks] = useState([]);
   useEffect(() => {
-    requestRecipes(url, setDrinks, key);
+    requestRecipes(url, drinks, setDrinks, key);
   }, []);
 
   // const { data } = useContext(recipesContext);
