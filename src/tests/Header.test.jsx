@@ -1,8 +1,8 @@
-import { screen } from '@testing-library/react';
 import React from 'react';
+import { screen } from '@testing-library/react';
 import Header from '../components/Header';
 import renderWithRouter from './renderWithRouter';
-import FoodRecipes from '../components/Fo'
+import FoodRecipes from '../pages/FoodRecipes';
 
 const dataBtnSearchIcon = 'search-top-btn';
 const dataBtnProfile = 'profile-top-btn';

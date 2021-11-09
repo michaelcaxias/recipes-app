@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import requestRecipes from '../helpers/requestRecipes';
 import recipesContext from '../context/recipesContext';
+import '../styles/foodAndDrinks.css';
 
 const MAX_RECIPES = 12;
 const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -16,19 +17,20 @@ export default function FoodRecipes() {
     requestRecipes(url, data, setData, key);
   }, []);
 
-  const recipes = data ? data.slice(0, MAX_RECIPES) : [];
   return (
     <section>
       <Header title="Comidas" />
       Receitas de comida
-      { recipes.map(({ strMealThumb, strMeal }, index) => (
-        <RecipeCard
-          key={ index }
-          image={ strMealThumb }
-          index={ index }
-          name={ strMeal }
-        />
-      )) }
+      <section className="cards-container">
+        { data && data.slice(0, MAX_RECIPES).map(({ strMealThumb, strMeal }, index) => (
+          <RecipeCard
+            key={ index }
+            image={ strMealThumb }
+            index={ index }
+            name={ strMeal }
+          />
+        )) }
+      </section>
       <FooterMenu />
     </section>
   );

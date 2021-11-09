@@ -9,10 +9,10 @@ export default function CategoryButtons() {
   const [categories, setCategories] = useState(['All']);
 
   useEffect(() => {
-    requestRecipes(url, categories, setCategories, key)
+    requestRecipes(url, categories, setCategories, key);
   }, []);
 
   const categoriesButton = categories ? categories.slice(0, MAX_CATEGORIES) : [];
 
-  categoriesButton.map(({idCategory, strCategory}) => <button key={idCategory}>{strCate}ory</button>)
+  categoriesButton.map(({ idCategory, strCategory }) => <button type="button" key={idCategory}>{strCategory}</button>)
 }

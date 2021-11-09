@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import recipesContext from '../context/recipesContext';
 import requestRecipes from '../helpers/requestRecipes';
+import '../styles/foodAndDrinks.css';
 
 const MAX_RECIPES = 12;
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -17,18 +18,19 @@ export default function Drinks() {
     requestRecipes(url, data, setData, key);
   }, []);
 
-  const recipes = data ? data.slice(0, MAX_RECIPES) : [];
   return (
     <section>
       <Header title="Bebidas" />
-      { recipes.map(({ strDrinkThumb, strDrink }, index) => (
-        <RecipeCard
-          key={ index }
-          image={ strDrinkThumb }
-          index={ index }
-          name={ strDrink }
-        />
-      )) }
+      <section className="cards-container">
+        { data && data.slice(0, MAX_RECIPES).map(({ strDrinkThumb, strDrink }, index) => (
+          <RecipeCard
+            key={ index }
+            image={ strDrinkThumb }
+            index={ index }
+            name={ strDrink }
+          />
+        )) }
+      </section>
       <FooterMenu />
     </section>
   );
