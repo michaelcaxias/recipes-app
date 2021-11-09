@@ -15,9 +15,8 @@ export default function Drinks() {
   const { data, setData } = useContext(recipesContext);
 
   useEffect(() => {
-    requestRecipes(url, data, setData, key);
+    requestRecipes(url, drinks, setDrinks, key);
   }, []);
-
   return (
     <section>
       <Header title="Bebidas" />

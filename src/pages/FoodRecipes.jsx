@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import CategoryButtons from '../components/CategoryButtons';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -14,23 +14,20 @@ const key = 'meals';
 export default function FoodRecipes() {
   const { data, setData } = useContext(recipesContext);
   useEffect(() => {
-    requestRecipes(url, data, setData, key);
-  }, []);
-
+    requestRecipes(url, meals, setMeals, key);
+  }, [])
   return (
     <section>
       <Header title="Comidas" />
-      Receitas de comida
-      <section className="cards-container">
-        { data && data.slice(0, MAX_RECIPES).map(({ strMealThumb, strMeal }, index) => (
-          <RecipeCard
-            key={ index }
-            image={ strMealThumb }
-            index={ index }
-            name={ strMeal }
-          />
-        )) }
-      </section>
+      <CategoryButtons />
+      { recipes.map(({ strMealThumb, strMeal }, index) => (
+        <RecipeCard
+          key={ index }
+          image={ strMealThumb }
+          index={ index }
+          name={ strMeal }
+        />
+      )) }
       <FooterMenu />
     </section>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import Login from './pages/Login';
 import FoodRecipes from './pages/FoodRecipes';
@@ -22,28 +22,26 @@ import RecipesContextProvider from './context/RecipesContextProvider';
 
 function App() {
   return (
-    <BrowserRouter>
-      <RecipesContextProvider>
-        <Switch>
-          <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
-          <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
-          <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
-          <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
-          <Route path="/explorar/comidas/area" component={ ExplorerFoodsArea } />
-          <Route path="/comidas/:id" component={ FoodId } />
-          <Route path="/bebidas/:id" component={ DrinksId } />
-          <Route path="/explorar/comidas" component={ ExplorerFoods } />
-          <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
-          <Route path="/comidas" component={ FoodRecipes } />
-          <Route path="/bebidas" component={ Drinks } />
-          <Route path="/explorar" component={ Explorer } />
-          <Route path="/perfil" component={ Perfil } />
-          <Route path="/receitas-feitas" component={ RecipesDone } />
-          <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
-          <Route path="/" component={ Login } />
-        </Switch>
-      </RecipesContextProvider>
-    </BrowserRouter>
+    <RecipesContextProvider>
+      <Switch>
+        <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
+        <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
+        <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
+        <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
+        <Route path="/explorar/comidas/area" component={ ExplorerFoodsArea } />
+        <Route path="/comidas/:id" component={ FoodId } />
+        <Route path="/bebidas/:id" component={ DrinksId } />
+        <Route path="/explorar/comidas" component={ ExplorerFoods } />
+        <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
+        <Route path="/comidas" component={ FoodRecipes } />
+        <Route path="/bebidas" component={ Drinks } />
+        <Route path="/explorar" component={ Explorer } />
+        <Route path="/perfil" component={ Perfil } />
+        <Route path="/receitas-feitas" component={ RecipesDone } />
+        <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route path="/" component={ Login } />
+      </Switch>
+    </RecipesContextProvider>
   );
 }
 
