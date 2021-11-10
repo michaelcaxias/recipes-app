@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import CategoryButtonsDrinks from '../components/CategoryButtonsDrinks';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
-// import recipesContext from '../context/recipesContext';
+import recipesContext from '../context/recipesContext';
+import '../styles/foodAndDrinks.css';
 // import requestRecipes from '../helpers/requestRecipes';
 
 const MAX_RECIPES = 12;
@@ -11,7 +12,13 @@ const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const key = 'drinks';
 
 export default function Drinks() {
+  const { data } = useContext(recipesContext);
   const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    setDrinks(data);
+  }, [data]);
+
   useEffect(() => {
     async function requestCategories() {
       const request = await fetch(url);
@@ -21,20 +28,23 @@ export default function Drinks() {
     requestCategories();
   }, []);
 
-  // const { data } = useContext(recipesContext);
-  const recipes = drinks ? drinks.slice(0, MAX_RECIPES) : [];
   return (
     <section>
       <Header title="Bebidas" searchButton />
       <CategoryButtonsDrinks />
-      { recipes.map(({ strDrinkThumb, strDrink }, index) => (
-        <RecipeCard
-          key={ index }
-          image={ strDrinkThumb }
-          index={ index }
-          name={ strDrink }
-        />
-      )) }
+      <section className="cards-container">
+        { drinks && drinks
+          .slice(0, MAX_RECIPES).map(({ strDrinkThumb, strDrink, idDrink }, index) => (
+            <RecipeCard
+              key={ index }
+              image={ strDrinkThumb }
+              id={ idDrink }
+              index={ index }
+              name={ strDrink }
+              page="bebidas"
+            />
+          )) }
+      </section>
       <FooterMenu />
     </section>
   );
