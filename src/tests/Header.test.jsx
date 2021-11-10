@@ -6,7 +6,7 @@ import FoodRecipes from '../pages/FoodRecipes';
 
 const dataBtnSearchIcon = 'search-top-btn';
 const dataBtnProfile = 'profile-top-btn';
-const dataTitulo = 'page-title;';
+// const dataTitulo = 'page-title;';
 
 describe('Testando Header.js', () => {
   test('se elementos do Header estão na tela', () => {
@@ -19,7 +19,10 @@ describe('Testando Header.js', () => {
 
   test('se o titulo muda de acordo com a rota', () => {
     renderWithRouter(<FoodRecipes />);
-    const tituloComidas = screen.getByTestId(dataTitulo);
+    const tituloComidas = screen.getByRole('heading', {
+      level: 1,
+      name: /Comidas/i,
+    });
     expect(tituloComidas).toBeInTheDocument();
   });
 });
