@@ -42,6 +42,7 @@ export default function FoodRecipes() {
               id={ idMeal }
               index={ index }
               name={ strMeal }
+              page="comidas"
             />
           )) }
       </section>

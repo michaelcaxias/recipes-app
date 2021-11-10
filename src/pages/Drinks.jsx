@@ -41,6 +41,7 @@ export default function Drinks() {
               id={ idDrink }
               index={ index }
               name={ strDrink }
+              page="bebidas"
             />
           )) }
       </section>

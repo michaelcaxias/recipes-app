@@ -5,12 +5,7 @@ import '../styles/loading.css';
 export default function Loading() {
   return (
     <div className="loading-container">
-      <object
-        className="logo-loading"
-        type="image/svg+xml"
-        data={ logo }
-      >
-      </object>
+      <img className="logo-loading" src={ logo } alt="logo"/>
       <span className="loading-heading">Carregando...</span>
     </div>
   );

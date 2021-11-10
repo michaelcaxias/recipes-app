@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Loading from '../components/Loading';
+import IngredientsMeasureList from '../components/IngredientsMeasureList';
 
 export default function FoodId() {
   const { id } = useParams();
-  const index = 1; // só pra tirar o erro
 
   const [comidaId, setComidaId] = useState();
+  const [recomendedMeal, setRecomendedMeal] = useState();
+
+  const embedVideo = () => {
+    if (comidaId !== undefined) {
+      console.log('cheguei aqui');
+      const code = comidaId.strYoutube.split('v=');
+      return `http://www.youtube.com/embed/${code[1]}`;
+    }
+  };
 
   useEffect(() => {
     async function requestID() {
@@ -19,41 +28,42 @@ export default function FoodId() {
     requestID();
   }, [id]);
 
-  /* function quantityIngredients() {
-    const TWENTY = 20;
-    let counter = 0;
-    for (let i = 1; i <= TWENTY; i += 1) {
-      const ingredientAtual = `strIngredient${i}`;
-      if (comidaId[ingredientAtual]) counter += 1;
+  useEffect(() => {
+    async function requestRecomendedMeal() {
+      const recomendedMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const request = await fetch(recomendedMealURL);
+      const response = await request.json();
+      console.log(response);
+      setRecomendedMeal(response.meals);
     }
-    comidaId.strIngredient
-    return counter;
-  } */
+    requestRecomendedMeal();
+  }, []);
 
   if (!comidaId) {
     return <Loading />;
   }
 
-  // const object = {...comidaId}
-  const arrayKeys = Object.keys(comidaId);
-  const ingredientsKeys = arrayKeys.filter((key) => key.includes(''));
-
   return (
     <div>
-      { console.log(arrayKeys) }
-      <img data-testid="recipe-photo" alt="recipe-photo2" />
+      { console.log(recomendedMeal) }
+      <img data-testid="recipe-photo" alt="recipe" src={ comidaId.strMealThumb } />
       <h1 data-testid="recipe-title">{comidaId.strMeal}</h1>
-      <button type="button" data-testid="favorite-btn">Favoritos</button>
       <button type="button" data-testid="share-btn">Compartilhar</button>
+      <button type="button" data-testid="favorite-btn">Favoritos</button>
       <p data-testid="recipe-category">{comidaId.strCategory}</p>
       <h3>Ingredientes</h3>
-      {/* {comidaId.filter((Object.keys) => )} */}
-      // {quantityIngredients()}
-      <p data-testid={ `${index}-ingredient-name-and-measure` }>ingrediente</p>
+      <IngredientsMeasureList ingredients={ comidaId } />
       <h3>Modo de Preparo</h3>
       <p data-testid="instructions">{comidaId.strInstructions}</p>
-      <p data-testid="video">Vídeo</p>
-      <div data-testid={ `${index}-recomendation-card` }>
+      <iframe
+        data-testid="video"
+        width="340"
+        height="180"
+        src={ embedVideo() }
+        title="Youtube Video"
+        frameBorder="0"
+      />
+      <div data-testid="recomendation-card">
         Card_de_receitas_recomentadas
       </div>
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
