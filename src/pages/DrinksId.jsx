@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
+import MapRecommendation from '../components/MapRecommendation';
+import '../styles/foodAndDrinksDetails.css';
+import ShareButton from '../components/ShareButton';
 
 export default function DrinksId() {
+  const history = useHistory();
   const { id } = useParams();
 
-  const [bebidaId, setBebidaId] = useState();
+  const [drinkId, setDrinkId] = useState();
   const [recomendedDrink, setRecomendedDrink] = useState();
+  const [isStarted, setStateRecipe] = useState(true);
+
+  const startRecipe = () => {
+    setStateRecipe(false);
+    history.push(`/bebidas/${id}/in-progress`);
+  };
 
   useEffect(() => {
     async function requestID() {
-      const UrlID = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const resquestID = await fetch(UrlID);
+      const urlId = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const resquestID = await fetch(urlId);
       const response = await resquestID.json();
       console.log(response.drinks);
-      setBebidaId(response.drinks[0]);
+      setDrinkId(response.drinks[0]);
     }
     requestID();
   }, [id]);
@@ -31,26 +41,37 @@ export default function DrinksId() {
     requestRecomendedDrink();
   }, []);
 
-  if (!bebidaId) {
+  if (!drinkId) {
     return <Loading />;
   }
 
   return (
     <div>
-      { console.log(recomendedDrink) }
-      <img data-testid="recipe-photo" alt="recipe" src={ bebidaId.strDrinkThumb } />
-      <h1 data-testid="recipe-title">{bebidaId.strDrink}</h1>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
-      <button type="button" data-testid="favorite-btn">Favoritos</button>
-      <p data-testid="recipe-category">{bebidaId.strCategory}</p>
+      {console.log(recomendedDrink)}
+      <img
+        data-testid="recipe-photo"
+        alt="recipe"
+        src={ drinkId.strDrinkThumb }
+      />
+      <h1 data-testid="recipe-title">{drinkId.strDrink}</h1>
+      <ShareButton />
+      <button type="button" data-testid="favorite-btn">
+        Favoritos
+      </button>
+      <p data-testid="recipe-category">{drinkId.strAlcoholic}</p>
       <h3>Ingredientes</h3>
-      <IngredientsMeasureList ingredients={ bebidaId } />
+      <IngredientsMeasureList ingredients={ drinkId } />
       <h3>Modo de Preparo</h3>
-      <p data-testid="instructions">{bebidaId.strInstructions}</p>
-      <div data-testid="recomendation-card">
-        Card_de_receitas_recomentadas
-      </div>
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <p data-testid="instructions">{drinkId.strInstructions}</p>
+      <MapRecommendation type="bebidas" data={ recomendedDrink } />
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
+        onClick={ startRecipe }
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }

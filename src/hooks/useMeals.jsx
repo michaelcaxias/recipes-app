@@ -10,5 +10,5 @@ export default function useMeals(data, setData, url, key) {
       console.log(data);
     }
     requestCategories();
-  }, []);
+  }, [data, setData, url, key]);
 }
