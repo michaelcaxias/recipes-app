@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useHistory } from 'react-router';
 import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
+import recipesContext from '../context/recipesContext';
 import '../styles/foodAndDrinksDetails.css';
+import ShareButton from './ShareButton';
 
 export default function FoodId() {
   const history = useHistory();
@@ -12,6 +14,10 @@ export default function FoodId() {
   const [comidaId, setComidaId] = useState();
   const [recomendedMeal, setRecomendedMeal] = useState();
   const [isStarted, setStateRecipe] = useState(true);
+  const [nameButton, setNameButton] = useState('Iniciar Receita');
+
+  const { getIngredients } = useContext(recipesContext);
+
 
   const embedVideo = () => {
     if (comidaId !== undefined) {
@@ -21,9 +27,11 @@ export default function FoodId() {
     }
   };
 
-  const startRecipe = () => {
+  const startRecipe = (event) => {
     setStateRecipe(false);
     history.push(`/comidas/${id}/in-progress`);
+    // localStorage.setItem(comidaId.)
+    setNameButton('Continuar Receita');
   };
 
   useEffect(() => {
@@ -54,10 +62,11 @@ export default function FoodId() {
 
   return (
     <div>
+      {getIngredients(comidaId)}
       { console.log(recomendedMeal) }
       <img data-testid="recipe-photo" alt="recipe" src={ comidaId.strMealThumb } />
       <h1 data-testid="recipe-title">{comidaId.strMeal}</h1>
-      <button type="button" data-testid="share-btn">Compartilhar</button>
+      <ShareButton />
       <button type="button" data-testid="favorite-btn">Favoritos</button>
       <p data-testid="recipe-category">{comidaId.strCategory}</p>
       <h3>Ingredientes</h3>
@@ -77,9 +86,9 @@ export default function FoodId() {
         type="button"
         data-testid="start-recipe-btn"
         className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
-        onClick={ startRecipe }
+        onClick={ (event) => startRecipe(event) }
       >
-        Iniciar Receita
+        { nameButton }
       </button>
     </div>
   );

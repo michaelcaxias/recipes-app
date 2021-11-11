@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
 import '../styles/foodAndDrinksDetails.css';
+import ShareButton from './ShareButton';
 
 export default function DrinksId() {
   const history = useHistory();
@@ -53,9 +54,7 @@ export default function DrinksId() {
         src={ bebidaId.strDrinkThumb }
       />
       <h1 data-testid="recipe-title">{bebidaId.strDrink}</h1>
-      <button type="button" data-testid="share-btn">
-        Compartilhar
-      </button>
+      <ShareButton />
       <button type="button" data-testid="favorite-btn">
         Favoritos
       </button>

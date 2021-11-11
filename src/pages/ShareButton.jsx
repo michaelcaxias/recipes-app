@@ -1,19 +1,27 @@
-import React from 'react';
-import { useLocation } from 'react-router';
+import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
 export default function ShareButton() {
-  const { pathname } = useLocation();
-  return (
-    <button
-      type="button"
-      data-testid="share-btn"
-      onClick={ () => copy(pathname) }
-    >
-      <img src={ shareIcon } alt="botão de compartilhar" />
+  const [isCopied, setCopied] = useState(false);
 
-    </button>
+  const copyPathname = () => {
+    copy(window.location.href);
+    setCopied(true);
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ copyPathname }
+      >
+        <img src={ shareIcon } alt="botão de compartilhar" />
+
+      </button>
+      { isCopied && <span>Link copiado!</span> }
+    </>
   );
 }
