@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-// import IngredientListProgress from '../components/IngredientListProgress';
-// import recipesContext from '../context/recipesContext';
 import { useParams } from 'react-router';
+import IngredientListProgress from '../components/IngredientListProgress';
+// import recipesContext from '../context/recipesContext';
 import Loading from '../components/Loading';
-import ShareButton from './ShareButton';
+import ShareButton from '../components/ShareButton';
 
 export default function FoodInProgress() {
   const [recipe, setRecipe] = useState();
@@ -26,7 +26,6 @@ export default function FoodInProgress() {
 
   return (
     <section>
-      Food in progress
       <div>
         <img
           data-testid="recipe-photo"
@@ -43,6 +42,9 @@ export default function FoodInProgress() {
       </div>
       <div>
         <span data-testid="recipe-category">{recipe.strCategory}</span>
+      </div>
+      <div>
+        <IngredientListProgress ingredients={ recipe } />
       </div>
     </section>
   );
