@@ -10,9 +10,20 @@ export default function IngredientsMeasureList({ ingredients }) {
     <ul>
       { ingredientsKeys.map((key, index) => (
         ingredients[key] && (
-          <li key={ key } data-testid={ `${index}-ingredient-name-and-measure` }>
+          <label
+            htmlFor={ key }
+            key={ key }
+            data-testid={ `${index}-ingredient-name-and-measure`}
+          >
             { `${ingredients[key]} - ${ingredients[ingredientMeasureKeys[index]]}` }
-          </li>
+            <input
+              type="checkbox"
+              id={ key }
+              name={ key }
+              checked={ false }
+              // onChange={}
+            />
+          </label>
         )))}
     </ul>
   );
