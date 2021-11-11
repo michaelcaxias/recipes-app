@@ -6,32 +6,26 @@ import MapRecommendation from '../components/MapRecommendation';
 import recipesContext from '../context/recipesContext';
 import '../styles/foodAndDrinksDetails.css';
 import ShareButton from './ShareButton';
+import Video from '../components/Video';
 
 export default function FoodId() {
   const history = useHistory();
   const { id } = useParams();
 
-  const [comidaId, setComidaId] = useState();
+  const [foodId, setFoodId] = useState();
   const [recomendedMeal, setRecomendedMeal] = useState();
   const [isStarted, setStateRecipe] = useState(true);
-  const [nameButton, setNameButton] = useState('Iniciar Receita');
+
+  const startText = 'Iniciar Receita';
+  const continueText = 'Continuar Receita';
 
   const { getIngredients } = useContext(recipesContext);
 
-
-  const embedVideo = () => {
-    if (comidaId !== undefined) {
-      console.log('cheguei aqui');
-      const code = comidaId.strYoutube.split('v=');
-      return `http://www.youtube.com/embed/${code[1]}`;
-    }
-  };
-
-  const startRecipe = (event) => {
+  const startRecipe = () => {
     setStateRecipe(false);
     history.push(`/comidas/${id}/in-progress`);
-    // localStorage.setItem(comidaId.)
-    setNameButton('Continuar Receita');
+    const foodName = foodId.strMeal;
+    localStorage.setItem(foodName, true);
   };
 
   useEffect(() => {
@@ -40,55 +34,48 @@ export default function FoodId() {
       const resquestID = await fetch(UrlID);
       const response = await resquestID.json();
       console.log(response.meals);
-      setComidaId(response.meals[0]);
+      setFoodId(response.meals[0]);
     }
     requestID();
   }, [id]);
 
   useEffect(() => {
-    async function requestRecomendedMeal() {
+    async function requestRecommendedMeal() {
       const recomendedMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedMealURL);
       const response = await request.json();
       console.log(response);
       setRecomendedMeal(response.meals);
     }
-    requestRecomendedMeal();
+    requestRecommendedMeal();
   }, []);
 
-  if (!comidaId) {
+  if (!foodId) {
     return <Loading />;
   }
 
   return (
     <div>
-      {getIngredients(comidaId)}
+      {getIngredients(foodId)}
       { console.log(recomendedMeal) }
-      <img data-testid="recipe-photo" alt="recipe" src={ comidaId.strMealThumb } />
-      <h1 data-testid="recipe-title">{comidaId.strMeal}</h1>
+      <img data-testid="recipe-photo" alt="recipe" src={ foodId.strMealThumb } />
+      <h1 data-testid="recipe-title">{foodId.strMeal}</h1>
       <ShareButton />
       <button type="button" data-testid="favorite-btn">Favoritos</button>
-      <p data-testid="recipe-category">{comidaId.strCategory}</p>
+      <p data-testid="recipe-category">{foodId.strCategory}</p>
       <h3>Ingredientes</h3>
-      <IngredientsMeasureList ingredients={ comidaId } />
+      <IngredientsMeasureList ingredients={ foodId } />
       <h3>Modo de Preparo</h3>
-      <p data-testid="instructions">{comidaId.strInstructions}</p>
-      <iframe
-        data-testid="video"
-        width="340"
-        height="180"
-        src={ embedVideo() }
-        title="Youtube Video"
-        frameBorder="0"
-      />
+      <p data-testid="instructions">{foodId.strInstructions}</p>
+      <Video comida={ foodId } />
       <MapRecommendation type="comidas" data={ recomendedMeal } />
       <button
         type="button"
         data-testid="start-recipe-btn"
         className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
-        onClick={ (event) => startRecipe(event) }
+        onClick={ () => startRecipe() }
       >
-        { nameButton }
+        { localStorage.getItem(foodId.strMeal) ? continueText : startText }
       </button>
     </div>
   );
