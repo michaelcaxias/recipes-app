@@ -1,8 +1,12 @@
 .btnStartRecipe {
+  background-color: rgb(255, 70, 70);
+  border: none;
   bottom: 0;
-  left: 50%;
+  color: whitesmoke;
+  font-weight: 600;
+  padding: 10px;
   position: fixed;
-  transform: translate(-50%, -50%);
+  width: 100%;
 }
 
 .btnStartRecipeHidden {
