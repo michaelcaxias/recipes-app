@@ -7,6 +7,16 @@ export default function Perfil() {
   const history = useHistory();
   const [userEmail, setUserEmail] = useState('');
 
+  const logout = () => {
+    localStorage.removeItem('user');
+    localStorage.removeItem('mealsToken');
+    localStorage.removeItem('cocktailsToken');
+    localStorage.removeItem('doneRecipes');
+    localStorage.removeItem('favoriteRecipes');
+    localStorage.removeItem('inProgressRecipes');
+    history.push('/');
+  };
+
   useEffect(() => {
     const emailStorage = localStorage.getItem('user');
     if (emailStorage) {
@@ -36,6 +46,7 @@ export default function Perfil() {
       <button
         type="button"
         data-testid="profile-logout-btn"
+        onClick={ logout }
       >
         Sair
       </button>
