@@ -7,4 +7,5 @@
 
 .btnStartRecipeHidden {
   display: none;
+  visibility: hidden;
 }

@@ -9,6 +9,7 @@ export default function RecipesContextProvider({ children }) {
 
   const [data, setData] = useState([]);
   const [page, setPage] = useState('food');
+  const [mealIngredients, setMealIngredients] = useState();
 
   const fetchAPI = async (url) => {
     const response = await fetch(url);
@@ -63,6 +64,10 @@ export default function RecipesContextProvider({ children }) {
     }
   };
 
+  function getIngredients(ingredients) {
+    setMealIngredients(ingredients);
+  }
+
   const context = {
     page,
     data,
@@ -70,6 +75,8 @@ export default function RecipesContextProvider({ children }) {
     setPage,
     filterByFoods,
     filterByDrinks,
+    mealIngredients,
+    getIngredients,
   };
 
   useEffect(() => {
