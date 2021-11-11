@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 
 export default function Perfil() {
+  const history = useHistory();
   const [userEmail, setUserEmail] = useState('');
 
   useEffect(() => {
@@ -20,12 +22,14 @@ export default function Perfil() {
       <button
         type="button"
         data-testid="profile-done-btn"
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Receitas Feitas
       </button>
       <button
         type="button"
         data-testid="profile-favorite-btn"
+        onClick={ () => history.push('/receitas-favoritas') }
       >
         Receitas Favoritas
       </button>
