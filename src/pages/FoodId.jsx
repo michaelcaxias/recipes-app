@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
+import '../styles/foodAndDrinksDetails.css';
 
 export default function FoodId() {
   const { id } = useParams();
@@ -65,7 +66,9 @@ export default function FoodId() {
         frameBorder="0"
       />
       <MapRecommendation type="comidas" data={ recomendedMeal } />
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <button type="button" data-testid="start-recipe-btn" className="btnStartRecipe">
+        Iniciar Receita
+      </button>
     </div>
   );
 }
