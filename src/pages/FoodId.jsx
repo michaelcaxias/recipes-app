@@ -5,8 +5,9 @@ import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
 import recipesContext from '../context/recipesContext';
 import '../styles/foodAndDrinksDetails.css';
-import ShareButton from './ShareButton';
+import ShareButton from '../components/ShareButton';
 import Video from '../components/Video';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function FoodId() {
   const history = useHistory();
@@ -14,7 +15,7 @@ export default function FoodId() {
 
   const [foodId, setFoodId] = useState();
   const [recomendedMeal, setRecomendedMeal] = useState();
-  const [isStarted, setStateRecipe] = useState(true);
+  // const [isStarted, setStateRecipe] = useState(true);
 
   const startText = 'Iniciar Receita';
   const continueText = 'Continuar Receita';
@@ -22,7 +23,7 @@ export default function FoodId() {
   const { getIngredients } = useContext(recipesContext);
 
   const startRecipe = () => {
-    setStateRecipe(false);
+    // setStateRecipe(false);
     history.push(`/comidas/${id}/in-progress`);
     const foodName = foodId.strMeal;
     localStorage.setItem(foodName, true);
@@ -61,7 +62,7 @@ export default function FoodId() {
       <img data-testid="recipe-photo" alt="recipe" src={ foodId.strMealThumb } />
       <h1 data-testid="recipe-title">{foodId.strMeal}</h1>
       <ShareButton />
-      <button type="button" data-testid="favorite-btn">Favoritos</button>
+      <FavoriteButton favorite={ foodId } />
       <p data-testid="recipe-category">{foodId.strCategory}</p>
       <h3>Ingredientes</h3>
       <IngredientsMeasureList ingredients={ foodId } />
@@ -72,7 +73,7 @@ export default function FoodId() {
       <button
         type="button"
         data-testid="start-recipe-btn"
-        className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
+        className="btnStartRecipe"
         onClick={ () => startRecipe() }
       >
         { localStorage.getItem(foodId.strMeal) ? continueText : startText }

@@ -4,7 +4,7 @@ import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
 import '../styles/foodAndDrinksDetails.css';
-import ShareButton from './ShareButton';
+import ShareButton from '../components/ShareButton';
 
 export default function DrinksId() {
   const history = useHistory();
