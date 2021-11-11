@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
 import '../styles/foodAndDrinksDetails.css';
 
 export default function FoodId() {
+  const history = useHistory();
   const { id } = useParams();
 
   const [comidaId, setComidaId] = useState();
   const [recomendedMeal, setRecomendedMeal] = useState();
+  const [isStarted, setStateRecipe] = useState(true);
 
   const embedVideo = () => {
     if (comidaId !== undefined) {
@@ -17,6 +19,11 @@ export default function FoodId() {
       const code = comidaId.strYoutube.split('v=');
       return `http://www.youtube.com/embed/${code[1]}`;
     }
+  };
+
+  const startRecipe = () => {
+    setStateRecipe(false);
+    history.push(`/comidas/${id}/in-progress`);
   };
 
   useEffect(() => {
@@ -66,7 +73,12 @@ export default function FoodId() {
         frameBorder="0"
       />
       <MapRecommendation type="comidas" data={ recomendedMeal } />
-      <button type="button" data-testid="start-recipe-btn" className="btnStartRecipe">
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
+        onClick={ startRecipe }
+      >
         Iniciar Receita
       </button>
     </div>

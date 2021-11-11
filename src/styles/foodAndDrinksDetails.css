@@ -1,5 +1,8 @@
 .btnStartRecipe {
   bottom: 0;
-  left: auto;
   position: fixed;
+}
+
+.btnStartRecipeHidden {
+  display: none;
 }
