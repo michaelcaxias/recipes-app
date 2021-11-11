@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import Loading from '../components/Loading';
 import IngredientsMeasureList from '../components/IngredientsMeasureList';
+import MapRecommendation from '../components/MapRecommendation';
 
 export default function DrinksId() {
   const { id } = useParams();
@@ -47,9 +48,7 @@ export default function DrinksId() {
       <IngredientsMeasureList ingredients={ bebidaId } />
       <h3>Modo de Preparo</h3>
       <p data-testid="instructions">{bebidaId.strInstructions}</p>
-      <div data-testid="recomendation-card">
-        Card_de_receitas_recomentadas
-      </div>
+      <MapRecommendation type="bebidas" data={ recomendedDrink } />
       <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
     </div>
   );
