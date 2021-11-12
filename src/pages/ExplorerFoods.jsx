@@ -11,7 +11,7 @@ export default function ExplorerFoods() {
       <button
         type="button"
         data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ () => history.push('/explorar/comidas/ingredientes') }
       >
         Por Ingredientes
       </button>
