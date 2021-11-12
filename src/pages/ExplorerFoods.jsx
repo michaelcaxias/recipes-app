@@ -5,6 +5,14 @@ import Header from '../components/Header';
 
 export default function ExplorerFoods() {
   const history = useHistory();
+
+  const handleSurpriseButton = async () => {
+    const request = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    const resolve = await request.json();
+    const { meals } = resolve;
+    history.push(`/comidas/${meals[0].idMeal}`);
+  };
+
   return (
     <section>
       <Header title="Explorar Comidas" searchButton={ false } />
@@ -25,7 +33,7 @@ export default function ExplorerFoods() {
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={ () => history.push('/receitas-favoritas') }
+        onClick={ handleSurpriseButton }
       >
         Me Surpreenda!
       </button>

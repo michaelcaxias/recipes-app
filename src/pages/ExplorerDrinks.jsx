@@ -5,6 +5,14 @@ import Header from '../components/Header';
 
 export default function ExplorerDrinks() {
   const history = useHistory();
+
+  const handleSurpriseButton = async () => {
+    const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    const resolve = await request.json();
+    const { drinks } = resolve;
+    history.push(`/bebidas/${drinks[0].idDrink}`);
+  };
+
   return (
     <section>
       <Header title="Explorar Bebidas" searchButton={ false } />
@@ -18,7 +26,7 @@ export default function ExplorerDrinks() {
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={ () => history.push('/receitas-favoritas') }
+        onClick={ handleSurpriseButton }
       >
         Me Surpreenda!
       </button>
