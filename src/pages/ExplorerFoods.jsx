@@ -18,7 +18,7 @@ export default function ExplorerFoods() {
       <button
         type="button"
         data-testid="explore-by-area"
-        onClick={ () => history.push('/receitas-favoritas') }
+        onClick={ () => history.push('/explorar/comidas/area') }
       >
         Por Local de Origem
       </button>
