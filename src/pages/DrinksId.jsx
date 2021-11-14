@@ -5,6 +5,7 @@ import IngredientsMeasureList from '../components/IngredientsMeasureList';
 import MapRecommendation from '../components/MapRecommendation';
 import '../styles/foodAndDrinksDetails.css';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function DrinksId() {
   const history = useHistory();
@@ -32,11 +33,11 @@ export default function DrinksId() {
 
   useEffect(() => {
     async function requestRecomendedDrink() {
-      const recomendedDrinkURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const recomendedDrinkURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedDrinkURL);
       const response = await request.json();
       console.log(response);
-      setRecomendedDrink(response.drinks);
+      setRecomendedDrink(response.meals);
     }
     requestRecomendedDrink();
   }, []);
@@ -51,19 +52,20 @@ export default function DrinksId() {
       <img
         data-testid="recipe-photo"
         alt="recipe"
+        className="thumb-recipe"
         src={ drinkId.strDrinkThumb }
       />
       <h1 data-testid="recipe-title">{drinkId.strDrink}</h1>
       <ShareButton />
-      <button type="button" data-testid="favorite-btn">
-        Favoritos
-      </button>
+      <FavoriteButton favorite={ drinkId } type="bebida" />
       <p data-testid="recipe-category">{drinkId.strAlcoholic}</p>
       <h3>Ingredientes</h3>
       <IngredientsMeasureList ingredients={ drinkId } />
       <h3>Modo de Preparo</h3>
       <p data-testid="instructions">{drinkId.strInstructions}</p>
-      <MapRecommendation type="bebidas" data={ recomendedDrink } />
+      <div className="recommenndation-container">
+        <MapRecommendation type="comidas" data={ recomendedDrink } />
+      </div>
       <button
         type="button"
         data-testid="start-recipe-btn"

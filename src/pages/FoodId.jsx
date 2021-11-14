@@ -42,11 +42,10 @@ export default function FoodId() {
 
   useEffect(() => {
     async function requestRecommendedMeal() {
-      const recomendedMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const recomendedMealURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedMealURL);
       const response = await request.json();
-      console.log(response);
-      setRecomendedMeal(response.meals);
+      setRecomendedMeal(response.drinks);
     }
     requestRecommendedMeal();
   }, []);
@@ -59,17 +58,24 @@ export default function FoodId() {
     <div>
       {getIngredients(foodId)}
       { console.log(recomendedMeal) }
-      <img data-testid="recipe-photo" alt="recipe" src={ foodId.strMealThumb } />
+      <img
+        data-testid="recipe-photo"
+        alt="recipe"
+        src={ foodId.strMealThumb }
+        className="thumb-recipe"
+      />
       <h1 data-testid="recipe-title">{foodId.strMeal}</h1>
       <ShareButton />
-      <FavoriteButton favorite={ foodId } />
+      <FavoriteButton favorite={ foodId } type="comida" />
       <p data-testid="recipe-category">{foodId.strCategory}</p>
       <h3>Ingredientes</h3>
       <IngredientsMeasureList ingredients={ foodId } />
       <h3>Modo de Preparo</h3>
       <p data-testid="instructions">{foodId.strInstructions}</p>
       <Video comida={ foodId } />
-      <MapRecommendation type="comidas" data={ recomendedMeal } />
+      <div className="recommenndation-container">
+        <MapRecommendation type="bebidas" data={ recomendedMeal } />
+      </div>
       <button
         type="button"
         data-testid="start-recipe-btn"

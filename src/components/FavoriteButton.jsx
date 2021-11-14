@@ -1,39 +1,73 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-export default function FavoriteButton({ foodId }) {
-  const favoriteObj = [{
-    id: 'id-da-receita',
-    type: 'comida-ou-bebida',
-    area: 'area-da-receita-ou-texto-vazio',
-    category: 'categoria-da-receita-ou-texto-vazio',
-    alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-    name: 'nome-da-receita',
-    image: 'imagem-da-receita',
-  }];
+// essa função diminui a complexidade do FavoriteButton
+function checkFavorites(favorite, idItem, setFavoriteIcon) {
+  const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const searchItem = favoritesStorage.some((item) => item.id === favorite[idItem]);
+  if (searchItem) setFavoriteIcon(blackHeartIcon);
+}
 
-  const [favorite, setFavorite] = useState(whiteHeartIcon);
-
-  function favoriteRecipes() {
-    const storageFavorite = localStorage.getItem(favoriteRecipes);
-    if (storageFavorite) {
-
-    } else {
-      localStorage.setItem(favoriteRecipes, []);
-    }
-    setFavorite(blackHeartIcon);
+export default function FavoriteButton({ favorite, type }) {
+  if (!localStorage.getItem('favoriteRecipes')) {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
   }
+  const idItem = (type === 'comida') ? 'idMeal' : 'idDrink';
+  const favoriteObj = {
+    type,
+    area: favorite.strArea || '',
+    category: favorite.strCategory || '',
+    id: favorite.idMeal || favorite.idDrink,
+    name: favorite.strMeal || favorite.strDrink,
+    alcoholicOrNot: favorite.strAlcoholic || '',
+    image: favorite.strMealThumb || favorite.strDrinkThumb,
+  };
+
+  const [favoriteIcon, setFavoriteIcon] = useState(whiteHeartIcon);
+
+  function favoriteRecipe() {
+    let indexItem;
+    const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const searchItem = favoritesStorage.some((item, index) => {
+      if (item.id === favorite[idItem]) {
+        indexItem = index;
+        return true;
+      }
+      return false;
+    });
+
+    if (!searchItem) {
+      // caso o item não exista no localStorage - adiciona
+      favoritesStorage.push(favoriteObj);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesStorage));
+      setFavoriteIcon(blackHeartIcon);
+    } else {
+      // caso o item exista no localStorage - remove
+      favoritesStorage.splice(indexItem, 1);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoritesStorage));
+      setFavoriteIcon(whiteHeartIcon);
+    }
+  }
+
+  useEffect(() => {
+    checkFavorites(favorite, idItem, setFavoriteIcon);
+  }, [favorite, idItem]);
 
   return (
     <div>
       <button
         type="button"
-        data-testid="favorite-btn"
-        onClick={ favoriteRecipes }
+        onClick={ favoriteRecipe }
       >
-        <img src={ favorite } alt="Favorite" />
+        <img data-testid="favorite-btn" src={ favoriteIcon } alt="Favorite" />
       </button>
     </div>
   );
 }
+
+FavoriteButton.propTypes = {
+  favorite: PropTypes.objectOf(PropTypes.string).isRequired,
+  type: PropTypes.string.isRequired,
+};

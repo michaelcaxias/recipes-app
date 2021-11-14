@@ -1,3 +1,7 @@
+.thumb-recipe {
+  width: 100%;
+}
+
 .btnStartRecipe {
   background-color: rgb(255, 70, 70);
   border: none;
@@ -12,4 +16,35 @@
 .btnStartRecipeHidden {
   display: none;
   visibility: hidden;
+}
+
+.recommenndation-container {
+  background-color: slateblue;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 5px;
+  margin-bottom: 50px;
+}
+
+.recommendation-card {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 170px;
+  height: 160px;
+  margin-right: 5px;
+  background: #eee;
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recommendation-card > p {
+  margin: 0;
 }

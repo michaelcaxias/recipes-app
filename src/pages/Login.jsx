@@ -15,6 +15,19 @@ export default function Login() {
     localStorage.setItem('cocktailsToken', '1');
     const objectEmail = { email };
     localStorage.setItem('user', JSON.stringify(objectEmail));
+
+    if (!localStorage.getItem('doneRecipes')) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('favoriteRecipes')) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+    }
+
+    if (!localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({}));
+    }
+
     history.push('/comidas');
   };
 
