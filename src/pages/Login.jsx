@@ -25,7 +25,8 @@ export default function Login() {
     }
 
     if (!localStorage.getItem('inProgressRecipes')) {
-      localStorage.setItem('inProgressRecipes', JSON.stringify({}));
+      localStorage
+        .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
     }
 
     history.push('/comidas');

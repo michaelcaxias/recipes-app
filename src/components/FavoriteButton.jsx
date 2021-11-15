@@ -56,14 +56,12 @@ export default function FavoriteButton({ favorite, type }) {
   }, [favorite, idItem]);
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={ favoriteRecipe }
-      >
-        <img data-testid="favorite-btn" src={ favoriteIcon } alt="Favorite" />
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={ favoriteRecipe }
+    >
+      <img data-testid="favorite-btn" src={ favoriteIcon } alt="Favorite" />
+    </button>
   );
 }
 

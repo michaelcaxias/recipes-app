@@ -11,12 +11,27 @@ export default function DrinksId() {
   const history = useHistory();
   const { id } = useParams();
 
+  if (!localStorage.getItem('doneRecipes')) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+
+  if (!localStorage.getItem('inProgressRecipes')) {
+    localStorage
+      .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
+  }
+
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [drinkId, setDrinkId] = useState();
   const [recomendedDrink, setRecomendedDrink] = useState();
-  const [isStarted, setStateRecipe] = useState(true);
+  const [viewBtn, setViewBtn] = useState(false);
 
   const startRecipe = () => {
-    setStateRecipe(false);
+    const updateInProgressRecipes = {
+      ...inProgressRecipes,
+      cocktails: { ...inProgressRecipes.cocktails, [id]: drinkId.strDrink }, // aqui deve ser um array com os ingredientes
+    };
+    console.log(updateInProgressRecipes);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));
     history.push(`/bebidas/${id}/in-progress`);
   };
 
@@ -42,38 +57,75 @@ export default function DrinksId() {
     requestRecomendedDrink();
   }, []);
 
+  useEffect(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!doneRecipes.some((item) => item.id === id)) {
+      setViewBtn(true);
+    }
+  }, [id]);
+
+  function renderBtn() {
+    const searchItem = Object.keys(inProgressRecipes.cocktails)
+      .some((idKey) => idKey === id);
+    if (searchItem) {
+      return (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btnStartRecipe"
+        >
+          Continuar Receita
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className="btnStartRecipe"
+        onClick={ () => startRecipe() }
+      >
+        Iniciar Receita
+      </button>
+    );
+  }
+
   if (!drinkId) {
     return <Loading />;
   }
 
   return (
     <div>
-      {console.log(recomendedDrink)}
-      <img
-        data-testid="recipe-photo"
-        alt="recipe"
-        className="thumb-recipe"
-        src={ drinkId.strDrinkThumb }
-      />
-      <h1 data-testid="recipe-title">{drinkId.strDrink}</h1>
-      <ShareButton />
-      <FavoriteButton favorite={ drinkId } type="bebida" />
-      <p data-testid="recipe-category">{drinkId.strAlcoholic}</p>
-      <h3>Ingredientes</h3>
-      <IngredientsMeasureList ingredients={ drinkId } />
-      <h3>Modo de Preparo</h3>
-      <p data-testid="instructions">{drinkId.strInstructions}</p>
-      <div className="recommenndation-container">
+      <section className="container-thumb">
+        <img
+          data-testid="recipe-photo"
+          alt="recipe"
+          className="thumb-recipe"
+          src={ drinkId.strDrinkThumb }
+        />
+      </section>
+      <section className="header-recipe">
+        <div>
+          <p data-testid="recipe-category" className="category">
+            {drinkId.strAlcoholic}
+          </p>
+          <h1 data-testid="recipe-title">{drinkId.strDrink}</h1>
+        </div>
+        <div className="buttons">
+          <ShareButton />
+          <FavoriteButton favorite={ drinkId } type="bebida" />
+        </div>
+      </section>
+      <section className="instructions-recipe">
+        <h3>Ingredientes</h3>
+        <IngredientsMeasureList ingredients={ drinkId } />
+        <h3>Modo de Preparo</h3>
+        <p data-testid="instructions">{drinkId.strInstructions}</p>
+      </section>
+      <section className="recommenndation-container">
         <MapRecommendation type="comidas" data={ recomendedDrink } />
-      </div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className={ isStarted ? 'btnStartRecipe' : 'btnStartRecipeHidden' }
-        onClick={ startRecipe }
-      >
-        Iniciar Receita
-      </button>
+      </section>
+      { viewBtn ? renderBtn() : '' }
     </div>
   );
 }

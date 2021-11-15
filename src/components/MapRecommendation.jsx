@@ -8,7 +8,7 @@ export default function MapRecommendation({ type, data = [] }) {
 
   if (type === 'comidas') {
     return (
-      data.map(({ strMeal }, index) => {
+      data.map(({ strMeal, strMealThumb }, index) => {
         if (index < MAX_RECIPES) {
           return (
             <div
@@ -16,6 +16,13 @@ export default function MapRecommendation({ type, data = [] }) {
               className="recommendation-card"
               data-testid={ `${index}-recomendation-card` }
             >
+              <div className="card-thumb">
+                <img
+                  alt="recipe-thumb"
+                  src={ strMealThumb }
+                  className="thumb-recipe"
+                />
+              </div>
               <p data-testid={ `${index}-recomendation-title` }>{strMeal}</p>
             </div>
           );
@@ -26,7 +33,7 @@ export default function MapRecommendation({ type, data = [] }) {
   }
   if (type === 'bebidas') {
     return (
-      data.map(({ strDrink }, index) => {
+      data.map(({ strDrink, strDrinkThumb }, index) => {
         if (index < MAX_RECIPES) {
           return (
             <div
@@ -34,6 +41,13 @@ export default function MapRecommendation({ type, data = [] }) {
               className="recommendation-card"
               data-testid={ `${index}-recomendation-card` }
             >
+              <div className="card-thumb">
+                <img
+                  alt="recipe-thumb"
+                  src={ strDrinkThumb }
+                  className="thumb-recipe"
+                />
+              </div>
               <p data-testid={ `${index}-recomendation-title` }>{strDrink}</p>
             </div>
           );
