@@ -22,11 +22,12 @@ export default function FavoriteRecipes() {
       <button type="button" data-testid="filter-by-food-btn">Food</button>
       <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
       {favorites
-        ? favorites.map((favoritos, i) => (<CardFavorites
+        ? favorites.map((favoritos, i) => (
+          <CardFavorites
             key={ i }
             favorite={ favoritos }
             index={ i }
-        />))
+          />))
         : <p>Não tem favoritos</p>}
 
     </div>
