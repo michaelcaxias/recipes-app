@@ -11,7 +11,7 @@ export default function FavoriteRecipes() {
       <button type="button" data-testid={ `${index}-horizontal-share-btn` }>
         Compartilhar
       </button>
-      <img data-testid={ `${index}-horizontal-image` } src={ image } />
+      <img data-testid={ `${index}-horizontal-image` } alt="" src="" />
       <p data-testid={ `${index}-horizontal-top-text` }>Categoria</p>
       <h1 data-testid={ `${index}-horizontal-name` }>Nome</h1>
       <p data-testid={ `${index}-horizontal-done-date` }>Data</p>
