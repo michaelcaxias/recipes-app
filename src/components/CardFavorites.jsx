@@ -7,61 +7,62 @@ export default function CardFavorites({ favorite, index }) {
   return (
     <div>
       {favorite.type === 'comida'
-        ? <div>
-          <img
-            data-testid={ `${index}-horizontal-image` }
-            alt={ `Imagem da comida ${favorite.name}` }
-            src={ favorite.image }
-          />
-          <h1 data-testid={ `${index}-horizontal-name` }>{ favorite.name }</h1>
-          <p
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { `${favorite.area} - ${favorite.category}` }
-          </p>
-          <button type="button">
+        ? (
+          <div>
             <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              alt="compartilhar"
-              src={ shareIcon }
+              data-testid={ `${index}-horizontal-image` }
+              alt={ `Imagem da comida ${favorite.name}` }
+              src={ favorite.image }
             />
-          </button>
-          <button type="button">
+            <h1 data-testid={ `${index}-horizontal-name` }>{ favorite.name }</h1>
+            <p
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { `${favorite.area} - ${favorite.category}` }
+            </p>
+            <button type="button">
+              <img
+                data-testid={ `${index}-horizontal-share-btn` }
+                alt="compartilhar"
+                src={ shareIcon }
+              />
+            </button>
+            <button type="button">
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                alt="desfavoritar"
+                src={ blackHeartIcon }
+              />
+            </button>
+          </div>)
+        : (
+          <div>
             <img
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              alt="desfavoritar"
-              src={ blackHeartIcon }
+              data-testid={ `${index}-horizontal-image` }
+              alt={ `Imagem da bebida ${favorite.name}` }
+              src={ favorite.image }
             />
-          </button>
-          </div>
-        : <div>
-          <img
-            data-testid={ `${index}-horizontal-image` }
-            alt={ `Imagem da bebida ${favorite.name}` }
-            src={ favorite.image }
-          />
-          <h1 data-testid={ `${index}-horizontal-name` }>{ favorite.name }</h1>
-          <p
-            data-testid={ `${index}-horizontal-top-text` }
-          >
-            { favorite.alcoholicOrNot }
-          </p>
-          <button type="button">
-            <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              alt="compartilhar"
-              src={ shareIcon }
-            />
-          </button>
-          <button type="button">
-            <img
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              alt="desfavoritar"
-              src={ blackHeartIcon }
-            />
-          </button>
-          </div>}
-
+            <h1 data-testid={ `${index}-horizontal-name` }>{ favorite.name }</h1>
+            <p
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { favorite.alcoholicOrNot }
+            </p>
+            <button type="button">
+              <img
+                data-testid={ `${index}-horizontal-share-btn` }
+                alt="compartilhar"
+                src={ shareIcon }
+              />
+            </button>
+            <button type="button">
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                alt="desfavoritar"
+                src={ blackHeartIcon }
+              />
+            </button>
+          </div>)}
     </div>
   );
 }
