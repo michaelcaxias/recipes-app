@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CardFavorites from '../components/CardFavorites';
 import Header from '../components/Header';
+import Loading from '../components/Loading';
 
 export default function FavoriteRecipes() {
+  const [favorites, setFavorites] = useState();
+
+  useEffect(() => {
+    const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setFavorites(favoritesStorage);
+  }, []);
+
+  if (!favorites) {
+    return <Loading />;
+  }
+
   return (
     <div>
       <Header title="Receitas Favoritas" searchButton={ false } />
       <button type="button" data-testid="filter-by-all-btn">All</button>
       <button type="button" data-testid="filter-by-food-btn">Food</button>
       <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
-      <button type="button" data-testid={ `${index}-horizontal-share-btn` }>
-        Compartilhar
-      </button>
-      <img data-testid={ `${index}-horizontal-image` } alt="" src="" />
-      <p data-testid={ `${index}-horizontal-top-text` }>Categoria</p>
-      <h1 data-testid={ `${index}-horizontal-name` }>Nome</h1>
-      <p data-testid={ `${index}-horizontal-done-date` }>Data</p>
-      <p data-testid={ `${index}-${tagName}-horizontal-tag` }>Tags</p>
+      {favorites
+        ? favorites.map((favoritos, i) => (<CardFavorites
+            key={ i }
+            favorite={ favoritos }
+            index={ i }
+        />))
+        : <p>Não tem favoritos</p>}
+
     </div>
 
   );
