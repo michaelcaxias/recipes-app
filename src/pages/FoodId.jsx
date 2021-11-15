@@ -13,20 +13,31 @@ export default function FoodId() {
   const history = useHistory();
   const { id } = useParams();
 
+  if (!localStorage.getItem('doneRecipes')) {
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+
+  if (!localStorage.getItem('inProgressRecipes')) {
+    localStorage
+      .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
+  }
+
   const [foodId, setFoodId] = useState();
   const [recomendedMeal, setRecomendedMeal] = useState();
-  // const [isStarted, setStateRecipe] = useState(true);
+  const [viewBtn, setViewBtn] = useState(false);
 
-  const startText = 'Iniciar Receita';
-  const continueText = 'Continuar Receita';
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const { getIngredients } = useContext(recipesContext);
 
   const startRecipe = () => {
-    // setStateRecipe(false);
+    const updateInProgressRecipes = {
+      ...inProgressRecipes,
+      meals: { ...inProgressRecipes.meals, [id]: foodId.strMeal }, // aqui deve ser um array com os ingredientes
+    };
+    console.log(updateInProgressRecipes);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));
     history.push(`/comidas/${id}/in-progress`);
-    const foodName = foodId.strMeal;
-    localStorage.setItem(foodName, true);
   };
 
   useEffect(() => {
@@ -42,14 +53,45 @@ export default function FoodId() {
 
   useEffect(() => {
     async function requestRecommendedMeal() {
-      const recomendedMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const recomendedMealURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedMealURL);
       const response = await request.json();
-      console.log(response);
-      setRecomendedMeal(response.meals);
+      setRecomendedMeal(response.drinks);
     }
     requestRecommendedMeal();
   }, []);
+
+  useEffect(() => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (!doneRecipes.some((item) => item.id === id)) {
+      setViewBtn(true);
+    }
+  }, [id]);
+
+  function renderBtn() {
+    const searchItem = Object.keys(inProgressRecipes.meals).some((idKey) => idKey === id);
+    if (searchItem) {
+      return (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btnStartRecipe"
+        >
+          Continuar Receita
+        </button>
+      );
+    }
+    return (
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        className="btnStartRecipe"
+        onClick={ () => startRecipe() }
+      >
+        Iniciar Receita
+      </button>
+    );
+  }
 
   if (!foodId) {
     return <Loading />;
@@ -58,26 +100,37 @@ export default function FoodId() {
   return (
     <div>
       {getIngredients(foodId)}
-      { console.log(recomendedMeal) }
-      <img data-testid="recipe-photo" alt="recipe" src={ foodId.strMealThumb } />
-      <h1 data-testid="recipe-title">{foodId.strMeal}</h1>
-      <ShareButton />
-      <FavoriteButton favorite={ foodId } />
-      <p data-testid="recipe-category">{foodId.strCategory}</p>
-      <h3>Ingredientes</h3>
-      <IngredientsMeasureList ingredients={ foodId } />
-      <h3>Modo de Preparo</h3>
-      <p data-testid="instructions">{foodId.strInstructions}</p>
-      <Video comida={ foodId } />
-      <MapRecommendation type="comidas" data={ recomendedMeal } />
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="btnStartRecipe"
-        onClick={ () => startRecipe() }
-      >
-        { localStorage.getItem(foodId.strMeal) ? continueText : startText }
-      </button>
+      <section className="container-thumb">
+        <img
+          data-testid="recipe-photo"
+          alt="recipe"
+          src={ foodId.strMealThumb }
+          className="thumb-recipe"
+        />
+      </section>
+      <section className="header-recipe">
+        <div>
+          <p data-testid="recipe-category" className="category">
+            {foodId.strCategory}
+          </p>
+          <h1 data-testid="recipe-title">{foodId.strMeal}</h1>
+        </div>
+        <div className="buttons">
+          <ShareButton />
+          <FavoriteButton favorite={ foodId } type="comida" />
+        </div>
+      </section>
+      <section className="instructions-recipe">
+        <h3>Ingredientes</h3>
+        <IngredientsMeasureList ingredients={ foodId } />
+        <h3>Modo de Preparo</h3>
+        <p data-testid="instructions">{foodId.strInstructions}</p>
+        <Video comida={ foodId } />
+      </section>
+      <section className="recommenndation-container">
+        <MapRecommendation type="bebidas" data={ recomendedMeal } />
+      </section>
+      { viewBtn ? renderBtn() : '' }
     </div>
   );
 }

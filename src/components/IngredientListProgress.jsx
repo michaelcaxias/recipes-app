@@ -10,7 +10,7 @@ export default function IngredientListProgress({ ingredients }) {
 
   // let isChecked = false;
 
-  const [checkedState, setCheckedState] = useState(
+  /* const [checkedState, setCheckedState] = useState(
     new Array(ingredientsKeys.length).fill(false)
   );
 
@@ -20,7 +20,7 @@ export default function IngredientListProgress({ ingredients }) {
     )};
 
     setCheckedState(updatedCheckedState);
-
+ */
   // const isChecked = handleCheckbox(event);
   return (
     <ul>
@@ -35,8 +35,8 @@ export default function IngredientListProgress({ ingredients }) {
               type="checkbox"
               id={ key }
               name={ key }
-              checked={ checkedState[index] }
-              onChange={ () => handleOnChange(index) }
+              // checked={ checkedState[index] }
+              // onChange={ () => handleOnChange(index) }
             />
             { `${ingredients[key]} - ${ingredients[ingredientMeasureKeys[index]]}` }
           </label>
