@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
 import { Card } from 'react-bootstrap';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import '../styles/foodAndDrinks.css';
+import recipesContext from '../context/recipesContext';
 
 export default function Ingredients() {
+  const history = useHistory();
   const [ingredients, setIngredients] = useState();
+
+  const { filterByFoods } = useContext(recipesContext);
 
   const TWELVE_INGREDIENTS = 12;
 
@@ -18,6 +23,11 @@ export default function Ingredients() {
     requestIngredients();
   }, []);
 
+  const handleClick = async (ingredient) => {
+    await filterByFoods({ searchFor: 'name', query: ingredient });
+    history.push('/comidas');
+  };
+
   const filteredIngredients = ingredients ? ingredients.slice(0, TWELVE_INGREDIENTS) : [];
 
   return (
@@ -27,16 +37,16 @@ export default function Ingredients() {
         { filteredIngredients.map((ingredient, index) => (
           <Card
             key={ index }
+            onClick={ () => handleClick(ingredient.strIngredient) }
             data-testid={ `${index}-ingredient-card` }
             style={ { width: '10rem' } }
           >
             <Card.Body key={ ingredient.idIngredient }>
               <Card.Img
-                data-testid={ `${index}-card-img` }
-                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
+                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
                 alt={ ingredient.strIngredient }
               />
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title>
                 {ingredient.strIngredient}
               </Card.Title>
             </Card.Body>
