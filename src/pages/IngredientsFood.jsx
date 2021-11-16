@@ -41,8 +41,9 @@ export default function Ingredients() {
             data-testid={ `${index}-ingredient-card` }
             style={ { width: '10rem' } }
           >
-            <Card.Body key={ ingredient.idIngredient }>
+            <Card.Body>
               <Card.Img
+                data-testid={ `${index}-card-img` }
                 src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
                 alt={ ingredient.strIngredient }
               />

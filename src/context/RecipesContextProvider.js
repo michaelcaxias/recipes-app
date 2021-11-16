@@ -12,7 +12,7 @@ export default function RecipesContextProvider({ children }) {
 
   const [data, setData] = useState([]);
   const [key, setKey] = useState('meals');
-  const [URL, setURL] = useState(urlMeals);
+  const [URL, setURL] = useState('');
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [page, setPage] = useState('food');
@@ -23,7 +23,7 @@ export default function RecipesContextProvider({ children }) {
     const resolve = await response.json();
     if (page === 'food') {
       setMeals(resolve.meals);
-      if (resolve.meals === null) {
+      if (!resolve.meals) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       } else if (resolve.meals.length === 1) {
         history.push(`/comidas/${resolve.meals[0].idMeal}`);
@@ -31,7 +31,7 @@ export default function RecipesContextProvider({ children }) {
     }
     if (page === 'drink') {
       setDrinks(resolve.drinks);
-      if (resolve.drinks === null) {
+      if (!resolve.drinks) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       } else if (resolve.drinks.length === 1) {
         history.push(`/bebidas/${resolve.drinks[0].idDrink}`);
@@ -80,6 +80,7 @@ export default function RecipesContextProvider({ children }) {
     data,
     meals,
     drinks,
+    URL,
     setMeals,
     setDrinks,
     setData,

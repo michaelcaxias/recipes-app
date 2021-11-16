@@ -7,8 +7,9 @@ import '../styles/foodAndDrinks.css';
 import recipesContext from '../context/recipesContext';
 
 export default function IngredientsDrink() {
-  const [ingredients, setIngredients] = useState();
   const history = useHistory();
+  const [ingredients, setIngredients] = useState();
+
   const { filterByFoods } = useContext(recipesContext);
 
   const TWELVE_INGREDIENTS = 12;
@@ -37,11 +38,11 @@ export default function IngredientsDrink() {
         { filteredIngredients.map((ingredient, index) => (
           <Card
             key={ index }
+            onClick={ () => handleClick(ingredient.strIngredient1) }
             data-testid={ `${index}-ingredient-card` }
             style={ { width: '10rem' } }
-            onClick={ () => handleClick(ingredient.strIngredient1) }
           >
-            <Card.Body key={ ingredient.strIngredient1 }>
+            <Card.Body>
               <Card.Img
                 data-testid={ `${index}-card-img` }
                 src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
