@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Card } from 'react-bootstrap';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
-import { Card } from 'react-bootstrap';
 
 export default function Ingredients() {
   const [ingredients, setIngredients] = useState();
-  const [ingredientsImage, setIngredientsImage] = useState([]);
 
   const TWELVE_INGREDIENTS = 12;
 
@@ -26,13 +25,15 @@ export default function Ingredients() {
   return (
     <section>
       <Header title="Explorar Ingredientes" searchButton={ false } />
-      <Card>
-        { filteredIngredients.map((ingredient, index) => (
-          <div key={ ingredient.idIngredient }>
-            <CardImg src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-small.png` } alt={ ingredient.strIngredient } />
-            <p>
+      <Card
+        style={ { width: '10rem' } }
+      >
+        { filteredIngredients.map((ingredient) => (
+          <Card.Body key={ ingredient.idIngredient }>
+            <Card.Img src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` } alt={ ingredient.strIngredient } />
+            <Card.Title>
               {ingredient.strIngredient}
-            </p>
+            </Card.Title>
           </div>
         ))}
       </Card>
