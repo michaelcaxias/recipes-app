@@ -3,11 +3,18 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router';
 import recipesContext from './recipesContext';
 
+const urlMeals = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const urlDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
 export default function RecipesContextProvider({ children }) {
   const { pathname } = useLocation();
   const history = useHistory();
 
   const [data, setData] = useState([]);
+  const [key, setKey] = useState('meals');
+  const [URL, setURL] = useState(urlMeals);
+  const [meals, setMeals] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const [page, setPage] = useState('food');
   const [mealIngredients, setMealIngredients] = useState();
 
@@ -15,7 +22,7 @@ export default function RecipesContextProvider({ children }) {
     const response = await fetch(url);
     const resolve = await response.json();
     if (page === 'food') {
-      setData(resolve.meals);
+      setMeals(resolve.meals);
       if (resolve.meals === null) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       } else if (resolve.meals.length === 1) {
@@ -23,7 +30,7 @@ export default function RecipesContextProvider({ children }) {
       }
     }
     if (page === 'drink') {
-      setData(resolve.drinks);
+      setDrinks(resolve.drinks);
       if (resolve.drinks === null) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       } else if (resolve.drinks.length === 1) {
@@ -71,6 +78,10 @@ export default function RecipesContextProvider({ children }) {
   const context = {
     page,
     data,
+    meals,
+    drinks,
+    setMeals,
+    setDrinks,
     setData,
     setPage,
     filterByFoods,
@@ -81,12 +92,25 @@ export default function RecipesContextProvider({ children }) {
 
   useEffect(() => {
     if (pathname.includes('/comidas')) {
+      setKey('meals');
+      setURL(urlMeals);
       setPage('food');
     }
     if (pathname.includes('/bebidas')) {
+      setKey('drinks');
+      setURL(urlDrinks);
       setPage('drink');
     }
   }, [pathname]);
+
+  useEffect(() => {
+    async function requestCategories() {
+      const request = await fetch(URL);
+      const response = await request.json();
+      return page === 'food' ? setMeals(response[key]) : setDrinks(response[key]);
+    }
+    requestCategories();
+  }, [key, URL, page]);
 
   return (
     <recipesContext.Provider value={ context }>

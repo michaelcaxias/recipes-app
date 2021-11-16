@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router';
 import { Card } from 'react-bootstrap';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import '../styles/foodAndDrinks.css';
+import recipesContext from '../context/recipesContext';
 
 export default function IngredientsDrink() {
   const [ingredients, setIngredients] = useState();
+  const history = useHistory();
+  const { filterByFoods } = useContext(recipesContext);
 
   const TWELVE_INGREDIENTS = 12;
 
@@ -18,6 +22,12 @@ export default function IngredientsDrink() {
     requestIngredients();
   }, []);
 
+  const handleClick = async (ingredient) => {
+    await filterByFoods({ searchFor: 'name', query: ingredient });
+    console.log(ingredient);
+    history.push('/bebidas');
+  };
+
   const filteredIngredients = ingredients ? ingredients.slice(0, TWELVE_INGREDIENTS) : [];
 
   return (
@@ -29,6 +39,7 @@ export default function IngredientsDrink() {
             key={ index }
             data-testid={ `${index}-ingredient-card` }
             style={ { width: '10rem' } }
+            onClick={ () => handleClick(ingredient.strIngredient1) }
           >
             <Card.Body key={ ingredient.strIngredient1 }>
               <Card.Img
