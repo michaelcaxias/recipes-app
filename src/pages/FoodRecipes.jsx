@@ -3,7 +3,6 @@ import CategoryButtonsMeals from '../components/CategoryButtonsMeals';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
-// import requestRecipes from '../helpers/requestRecipes';
 import recipesContext from '../context/recipesContext';
 import '../styles/foodAndDrinks.css';
 
@@ -32,7 +31,7 @@ export default function FoodRecipes() {
   return (
     <section>
       <Header title="Comidas" searchButton />
-      <CategoryButtonsMeals />
+      <CategoryButtonsMeals setData={ setMeals } />
       <section className="cards-container">
         { meals && meals
           .slice(0, MAX_RECIPES).map(({ strMealThumb, strMeal, idMeal }, index) => (

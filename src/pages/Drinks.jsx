@@ -5,7 +5,6 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import recipesContext from '../context/recipesContext';
 import '../styles/foodAndDrinks.css';
-// import requestRecipes from '../helpers/requestRecipes';
 
 const MAX_RECIPES = 12;
 const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -31,7 +30,7 @@ export default function Drinks() {
   return (
     <section>
       <Header title="Bebidas" searchButton />
-      <CategoryButtonsDrinks />
+      <CategoryButtonsDrinks setData={ setDrinks } />
       <section className="cards-container">
         { drinks && drinks
           .slice(0, MAX_RECIPES).map(({ strDrinkThumb, strDrink, idDrink }, index) => (
