@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
-const copy = require('clipboard-copy');
-
 export default function ShareButton() {
   const [isCopied, setCopied] = useState(false);
 
   const copyPathname = () => {
-    copy(window.location.href);
+    const link = window.location.href;
+    navigator.clipboard.writeText(link);
     setCopied(true);
   };
 
