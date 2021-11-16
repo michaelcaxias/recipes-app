@@ -33,7 +33,7 @@ export default function Ingredients() {
             <Card.Body key={ ingredient.idIngredient }>
               <Card.Img
                 data-testid={ `${index}-card-img` }
-                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png` }
+                src={ `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png` }
                 alt={ ingredient.strIngredient }
               />
               <Card.Title data-testid={ `${index}-card-name` }>

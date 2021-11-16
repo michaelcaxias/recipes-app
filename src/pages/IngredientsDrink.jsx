@@ -33,7 +33,7 @@ export default function IngredientsDrink() {
             <Card.Body key={ ingredient.strIngredient1 }>
               <Card.Img
                 data-testid={ `${index}-card-img` }
-                src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}.png` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png` }
                 alt={ ingredient.strIngredient1 }
               />
               <Card.Title data-testid={ `${index}-card-name` }>
@@ -43,6 +43,9 @@ export default function IngredientsDrink() {
           </Card>
         ))}
       </section>
+      <div style={ { height: '60px' } }>
+        <p />
+      </div>
       <FooterMenu />
     </section>
   );
