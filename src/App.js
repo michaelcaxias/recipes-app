@@ -5,7 +5,8 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import Login from './pages/Login';
 import FoodRecipes from './pages/FoodRecipes';
-import Ingredients from './pages/Ingredients';
+import IngredientsFood from './pages/IngredientsFood';
+import IngredientsDrink from './pages/IngredientsDrink';
 import Explorer from './pages/Explorer';
 import Perfil from './pages/Perfil';
 import RecipesDone from './pages/RecipesDone';
@@ -24,8 +25,8 @@ function App() {
   return (
     <RecipesContextProvider>
       <Switch>
-        <Route path="/explorar/comidas/ingredientes" component={ Ingredients } />
-        <Route path="/explorar/bebidas/ingredientes" component={ Ingredients } />
+        <Route path="/explorar/comidas/ingredientes" component={ IngredientsFood } />
+        <Route path="/explorar/bebidas/ingredientes" component={ IngredientsDrink } />
         <Route path="/comidas/:id/in-progress" component={ FoodInProgress } />
         <Route path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
         <Route path="/explorar/comidas/area" component={ ExplorerFoodsArea } />

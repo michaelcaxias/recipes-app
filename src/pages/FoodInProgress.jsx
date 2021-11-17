@@ -46,6 +46,17 @@ export default function FoodInProgress() {
       <div>
         <IngredientListProgress ingredients={ recipe } />
       </div>
+      <div>
+        <p data-testid="instructions">{ recipe.strInstructions }</p>
+      </div>
+      <div>
+        <button
+          type="button"
+          data-testid="finish-recipe-btn"
+        >
+          Finalizar receita
+        </button>
+      </div>
     </section>
   );
 }

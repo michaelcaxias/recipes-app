@@ -48,11 +48,11 @@ export default function DrinksId() {
 
   useEffect(() => {
     async function requestRecomendedDrink() {
-      const recomendedDrinkURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const recomendedDrinkURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedDrinkURL);
       const response = await request.json();
       console.log(response);
-      setRecomendedDrink(response.meals);
+      setRecomendedDrink(response.drinks);
     }
     requestRecomendedDrink();
   }, []);
@@ -73,6 +73,7 @@ export default function DrinksId() {
           type="button"
           data-testid="start-recipe-btn"
           className="btnStartRecipe"
+          onClick={ startRecipe }
         >
           Continuar Receita
         </button>
@@ -122,8 +123,8 @@ export default function DrinksId() {
         <h3>Modo de Preparo</h3>
         <p data-testid="instructions">{drinkId.strInstructions}</p>
       </section>
-      <section className="recommenndation-container">
-        <MapRecommendation type="comidas" data={ recomendedDrink } />
+      <section className="recommendation-container">
+        <MapRecommendation type="bebidas" data={ recomendedDrink } />
       </section>
       { viewBtn ? renderBtn() : '' }
     </div>
