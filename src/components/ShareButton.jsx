@@ -1,13 +1,15 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-export default function ShareButton() {
+export default function ShareButton({ dataTestId = 'share-button' }) {
   const [isCopied, setCopied] = useState(false);
 
   const copyPathname = () => {
-    copy(window.location.href);
+    const link = window.location.href;
+    copy(link);
     setCopied(true);
   };
 
@@ -15,13 +17,16 @@ export default function ShareButton() {
     <>
       <button
         type="button"
-        data-testid="share-btn"
         onClick={ copyPathname }
       >
-        <img src={ shareIcon } alt="botão de compartilhar" />
+        <img src={ shareIcon } data-testid={ dataTestId } alt="botão de compartilhar" />
 
       </button>
       { isCopied && <span>Link copiado!</span> }
     </>
   );
 }
+
+ShareButton.propTypes = {
+  dataTestId: PropTypes.string.isRequired,
+};
