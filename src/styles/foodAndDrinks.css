@@ -5,16 +5,17 @@
 }
 
 .category-btn-filters {
-  padding: 10px;
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
 }
 
 .category-btn-filters > button {
   border: none;
   border-radius: 20px;
-  padding: 5px 8px;
   font-size: 12px;
+  margin: 2px;
+  padding: 5px 8px;
 }
 
 .category-btn-filters > button:focus {
