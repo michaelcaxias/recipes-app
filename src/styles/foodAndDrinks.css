@@ -3,3 +3,32 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+
+.category-btn-filters {
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.category-btn-filters > button {
+  border: none;
+  border-radius: 20px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+
+.category-btn-filters > button:focus {
+  outline: none;
+}
+
+.btn-active {
+  background-color: rgb(251, 152, 135);
+  color: rgb(31, 25, 25);
+  font-weight: 600;
+}
+
+.btn-no-active {
+  background-color: rgb(224, 222, 222);
+  color: rgb(31, 25, 25);
+  font-weight: 600;
+}
