@@ -24,7 +24,7 @@ export default function Ingredients() {
   }, []);
 
   const handleClick = async (ingredient) => {
-    await filterByFoods({ searchFor: 'name', query: ingredient });
+    await filterByFoods({ searchFor: 'ingredient', query: ingredient });
     history.push('/comidas');
   };
 
