@@ -10,7 +10,7 @@ export default function IngredientsDrink() {
   const history = useHistory();
   const [ingredients, setIngredients] = useState();
 
-  const { filterByFoods } = useContext(recipesContext);
+  const { filterByDrinks } = useContext(recipesContext);
 
   const TWELVE_INGREDIENTS = 12;
 
@@ -24,8 +24,7 @@ export default function IngredientsDrink() {
   }, []);
 
   const handleClick = async (ingredient) => {
-    await filterByFoods({ searchFor: 'name', query: ingredient });
-    console.log(ingredient);
+    await filterByDrinks({ searchFor: 'ingredient', query: ingredient });
     history.push('/bebidas');
   };
 

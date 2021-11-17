@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardFavorites from '../components/CardFavorites';
 import Header from '../components/Header';
-import Loading from '../components/Loading';
 
 export default function FavoriteRecipes() {
   const [favorites, setFavorites] = useState([]);
@@ -10,10 +9,6 @@ export default function FavoriteRecipes() {
     const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setFavorites(favoritesStorage);
   }, []);
-
-  if (!favorites) {
-    return <Loading />;
-  }
 
   function searchFood() {
     const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));

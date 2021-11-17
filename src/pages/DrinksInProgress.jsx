@@ -4,6 +4,7 @@ import IngredientListProgress from '../components/IngredientListProgress';
 // import recipesContext from '../context/recipesContext';
 import Loading from '../components/Loading';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function DrinksInProgress() {
   const [recipe, setRecipe] = useState();
@@ -41,7 +42,7 @@ export default function DrinksInProgress() {
       </div>
       <div>
         <ShareButton />
-        <button type="button" data-testid="favorite-btn">Favoritos</button>
+        <FavoriteButton favorite={ recipe } type="bebida" />
       </div>
       <div>
         <span data-testid="recipe-category">{recipe.strCategory}</span>

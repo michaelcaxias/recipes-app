@@ -33,7 +33,7 @@ export default function FoodId() {
   const startRecipe = () => {
     const updateInProgressRecipes = {
       ...inProgressRecipes,
-      meals: { ...inProgressRecipes.meals, [id]: foodId.strMeal }, // aqui deve ser um array com os ingredientes
+      meals: { ...inProgressRecipes.meals, [id]: [] },
     };
     console.log(updateInProgressRecipes);
     localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));
