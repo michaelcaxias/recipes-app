@@ -26,16 +26,9 @@ export default function DrinksId() {
   const [viewBtn, setViewBtn] = useState(false);
 
   const startRecipe = () => {
-    const arrayKeys = Object.keys(drinkId);
-    const ingredientsKeys = arrayKeys.filter((key) => key.includes('strIngredient'));
-    const ingredientsValues = ingredientsKeys.map((key) => drinkId[key]);
-
     const updateInProgressRecipes = {
       ...inProgressRecipes,
-      cocktails: {
-        ...inProgressRecipes.cocktails,
-        [id]: ingredientsValues.filter((item) => item !== null),
-      },
+      cocktails: { ...inProgressRecipes.cocktails, [id]: [] },
     };
     console.log(updateInProgressRecipes);
     localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));

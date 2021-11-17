@@ -31,16 +31,9 @@ export default function FoodId() {
   const { getIngredients } = useContext(recipesContext);
 
   const startRecipe = () => {
-    const arrayKeys = Object.keys(foodId);
-    const ingredientsKeys = arrayKeys.filter((key) => key.includes('strIngredient'));
-    const ingredientsValues = ingredientsKeys.map((key) => foodId[key]);
-
     const updateInProgressRecipes = {
       ...inProgressRecipes,
-      meals: {
-        ...inProgressRecipes.meals,
-        [id]: ingredientsValues.filter((item) => item !== ''),
-      },
+      meals: { ...inProgressRecipes.meals, [id]: [] },
     };
     console.log(updateInProgressRecipes);
     localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));
