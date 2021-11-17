@@ -25,7 +25,6 @@ export default function IngredientsDrink() {
 
   const handleClick = async (ingredient) => {
     await filterByDrinks({ searchFor: 'ingredient', query: ingredient });
-    console.log(ingredient);
     history.push('/bebidas');
   };
 
