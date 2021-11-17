@@ -20,6 +20,13 @@ export default function FoodInProgress() {
     requestRecipe();
   }, [id]);
 
+  // function localProgressRecipe() {
+  //   if (!localStorage.getItem('inProgressRecipes')) {
+  //     localStorage
+  //       .setItem('inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }));
+  //   }
+  // }
+
   if (!recipe) {
     return <Loading />;
   }

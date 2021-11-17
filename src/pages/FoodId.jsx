@@ -23,7 +23,7 @@ export default function FoodId() {
   }
 
   const [foodId, setFoodId] = useState();
-  const [recomendedMeal, setRecomendedMeal] = useState();
+  const [recomendedDrink, setRecomendedDrink] = useState();
   const [viewBtn, setViewBtn] = useState(false);
 
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -31,9 +31,16 @@ export default function FoodId() {
   const { getIngredients } = useContext(recipesContext);
 
   const startRecipe = () => {
+    const arrayKeys = Object.keys(foodId);
+    const ingredientsKeys = arrayKeys.filter((key) => key.includes('strIngredient'));
+    const ingredientsValues = ingredientsKeys.map((key) => foodId[key]);
+
     const updateInProgressRecipes = {
       ...inProgressRecipes,
-      meals: { ...inProgressRecipes.meals, [id]: foodId.strMeal }, // aqui deve ser um array com os ingredientes
+      meals: {
+        ...inProgressRecipes.meals,
+        [id]: ingredientsValues.filter((item) => item !== ''),
+      },
     };
     console.log(updateInProgressRecipes);
     localStorage.setItem('inProgressRecipes', JSON.stringify(updateInProgressRecipes));
@@ -53,10 +60,10 @@ export default function FoodId() {
 
   useEffect(() => {
     async function requestRecommendedMeal() {
-      const recomendedMealURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const recomendedMealURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedMealURL);
       const response = await request.json();
-      setRecomendedMeal(response.meals);
+      setRecomendedDrink(response.drinks);
     }
     requestRecommendedMeal();
   }, []);
@@ -129,7 +136,7 @@ export default function FoodId() {
         <Video comida={ foodId } />
       </section>
       <section className="recommendation-container">
-        <MapRecommendation type="comidas" data={ recomendedMeal } />
+        <MapRecommendation type="bebidas" data={ recomendedDrink } />
       </section>
       { viewBtn ? renderBtn() : '' }
     </div>
