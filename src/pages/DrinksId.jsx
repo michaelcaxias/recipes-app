@@ -22,7 +22,7 @@ export default function DrinksId() {
 
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [drinkId, setDrinkId] = useState();
-  const [recomendedDrink, setRecomendedDrink] = useState();
+  const [recomendedMeal, setRecomendedMeal] = useState();
   const [viewBtn, setViewBtn] = useState(false);
 
   const startRecipe = () => {
@@ -48,11 +48,11 @@ export default function DrinksId() {
 
   useEffect(() => {
     async function requestRecomendedDrink() {
-      const recomendedDrinkURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const recomendedDrinkURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
       const request = await fetch(recomendedDrinkURL);
       const response = await request.json();
       console.log(response);
-      setRecomendedDrink(response.drinks);
+      setRecomendedMeal(response.meals);
     }
     requestRecomendedDrink();
   }, []);
@@ -124,7 +124,7 @@ export default function DrinksId() {
         <p data-testid="instructions">{drinkId.strInstructions}</p>
       </section>
       <section className="recommendation-container">
-        <MapRecommendation type="bebidas" data={ recomendedDrink } />
+        <MapRecommendation type="comidas" data={ recomendedMeal } />
       </section>
       { viewBtn ? renderBtn() : '' }
     </div>
