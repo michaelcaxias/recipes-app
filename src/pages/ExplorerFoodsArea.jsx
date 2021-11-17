@@ -30,6 +30,7 @@ export default function ExplorerFoodsArea() {
     <section>
       <Header title="Explorar Origem" />
       <select data-testid="explore-by-area-dropdown">
+        <option value="All">All</option>
         {area.map((areaOption) => (
           <option
             key={ areaOption }
