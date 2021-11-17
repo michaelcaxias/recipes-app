@@ -4,7 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-export default function ShareButton({ dataTestId = 'share-button' }) {
+export default function ShareButton({ dataTestId = 'share-btn' }) {
   const [isCopied, setCopied] = useState(false);
 
   const copyPathname = () => {

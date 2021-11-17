@@ -29,7 +29,7 @@ export default function IngredientListProgress({ ingredients }) {
           <label
             htmlFor={ key }
             key={ key }
-            data-testid={ `${index}-ingredient-name-and-measure` }
+            data-testid={ `${index}-ingredient-step` }
           >
             <input
               type="checkbox"
