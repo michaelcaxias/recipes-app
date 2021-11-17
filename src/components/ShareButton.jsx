@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import shareIcon from '../images/shareIcon.svg';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const copy = require('clipboard-copy');
 
 export default function ShareButton({ dataTestId = 'share-btn' }) {
-  const [isCopied, setCopied] = useState(false);
-
   const copyPathname = () => {
     const link = window.location.href;
     copy(link);
-    setCopied(true);
+    toast.info('Link copiado!');
   };
 
   return (
@@ -22,7 +23,7 @@ export default function ShareButton({ dataTestId = 'share-btn' }) {
         <img src={ shareIcon } data-testid={ dataTestId } alt="botão de compartilhar" />
 
       </button>
-      { isCopied && <span>Link copiado!</span> }
+      <ToastContainer />
     </>
   );
 }
