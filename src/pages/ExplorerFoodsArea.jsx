@@ -11,26 +11,41 @@ export default function ExplorerFoodsArea() {
   const { meals } = useContext(recipesContext);
 
   const [area, setAreas] = useState([]);
+  const [filteredMealsArea, setFilteredMealsArea] = useState([]);
+
+  const filterByArea = (areaToFilter) => {
+    if (areaToFilter === 'All') {
+      setFilteredMealsArea(meals);
+    } else {
+      const filter = meals.filter((meal) => meal.strArea === areaToFilter);
+      setFilteredMealsArea(filter);
+    }
+  };
 
   useEffect(() => {
     const getAreas = async () => {
       try {
         const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
-        const data = await response.json();
-        setAreas((data.meals).map((areaObject) => areaObject.strArea));
+        const result = await response.json();
+        const mapAreas = (result.meals).map((areaObject) => areaObject.strArea);
+        setAreas(['All'].concat(mapAreas));
+        setFilteredMealsArea(meals);
       } catch (error) {
         console.error(error);
         setAreas(['Nenhuma área foi encontrada']);
+        setFilteredMealsArea(meals);
       }
     };
     getAreas();
-  }, []);
+  }, [meals]);
 
   return (
     <section>
       <Header title="Explorar Origem" />
-      <select data-testid="explore-by-area-dropdown">
-        <option value="All">All</option>
+      <select
+        data-testid="explore-by-area-dropdown"
+        onChange={ ({ target: { value } }) => filterByArea(value) }
+      >
         {area.map((areaOption) => (
           <option
             key={ areaOption }
@@ -43,7 +58,7 @@ export default function ExplorerFoodsArea() {
         ))}
       </select>
       <section className="cards-container">
-        { meals && meals
+        { filteredMealsArea && filteredMealsArea
           .slice(0, MAX_RECIPES).map(({ strMealThumb, strMeal, idMeal }, index) => (
             <RecipeCard
               key={ index }
