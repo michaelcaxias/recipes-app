@@ -2,10 +2,20 @@
   background-color: rgb(255, 153, 153);
   color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 15px 0;
 }
 
 .header button {
   background-color: transparent;
   border: none;
+}
+
+.header button:focus {
+  outline: none;
+}
+
+.header h1 {
+  font-size: 25px;
+  margin: 0;
 }
