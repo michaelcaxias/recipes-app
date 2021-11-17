@@ -42,12 +42,13 @@ export default function CategoryButtons({ setData }) {
   const categoriesButton = categories ? categories.slice(0, MAX_CATEGORIES) : [];
 
   return (
-    <section>
+    <section className="category-btn-filters">
       <button
         type="button"
         value="All"
         onClick={ getAllRecipes }
         data-testid="All-category-filter"
+        className={ nameCategory === '' ? 'btn-active' : 'btn-no-active' }
       >
         All
       </button>
@@ -58,6 +59,7 @@ export default function CategoryButtons({ setData }) {
           type="button"
           value={ strCategory }
           onClick={ nameCategory !== strCategory ? filterMealsByCategory : getAllRecipes }
+          className={ nameCategory !== strCategory ? 'btn-no-active' : 'btn-active' }
         >
           {strCategory}
         </button>))}
