@@ -25,16 +25,14 @@ export default function HeaderSearchBar() {
 
   return (
     <header className="header-search-bar">
-      <label htmlFor="search-input">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search"
-          data-testid="search-input"
-          name="query"
-          onChange={ handleChange }
-        />
-      </label>
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Buscar Receita"
+        data-testid="search-input"
+        name="query"
+        onChange={ handleChange }
+      />
       <section>
         <label htmlFor="ingredient-radio">
           Ingrediente
