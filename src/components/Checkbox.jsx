@@ -18,7 +18,9 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
     if (tipo === 'meals') {
       const objMeals = stringProgress.meals[ingredient.idMeal];
       objMeals.push(ingredient[id]);
-      localStorage.setItem('inProgressRecipes', JSON.stringify({...stringProgress, meals: {...stringProgress.meals, [ingredient.idMeal]: [...objMeals] }}))
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...stringProgress, meals: {
+          ...stringProgress.meals, [ingredient.idMeal]: [...objMeals] } }));
     }
   }
 
