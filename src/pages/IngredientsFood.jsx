@@ -54,9 +54,6 @@ export default function Ingredients() {
           </Card>
         ))}
       </section>
-      <div style={ { height: '60px' } }>
-        <p />
-      </div>
       <FooterMenu />
     </section>
   );
