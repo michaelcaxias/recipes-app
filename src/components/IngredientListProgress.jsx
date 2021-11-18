@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 
 export default
-function IngredientListProgress({ ingredients, checkProgress, setIngredientsLength, tipo }) {
+function IngredientListProgress({
+  ingredients,
+  checkProgress, setIngredientsLength, tipo }) {
   const arrayKeys = Object.keys(ingredients);
   const ingredientsKeys = arrayKeys
     .filter((key) => key.includes('strIngredient'))
@@ -44,4 +46,5 @@ IngredientListProgress.propTypes = {
   ).isRequired,
   checkProgress: PropTypes.func.isRequired,
   setIngredientsLength: PropTypes.func.isRequired,
+  tipo: PropTypes.string.isRequired,
 };
