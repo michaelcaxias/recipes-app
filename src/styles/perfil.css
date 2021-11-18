@@ -1,0 +1,37 @@
+.perfil-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 80vh;
+  justify-content: center;
+}
+
+.perfil-section h1 {
+  font-size: x-large;
+}
+
+.perfil-section img {
+  width: 30vh;
+}
+
+.perfil-section section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttons-section {
+  gap: 0.5rem;
+  width: 90%;
+}
+
+.buttons-section button {
+  background-color: rgb(255, 70, 70);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: large;
+  padding: 0.5rem;
+  width: 100%;
+}

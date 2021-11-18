@@ -29,6 +29,7 @@
   .input-section:focus-within {
     outline-color: rgb(255, 70, 70);
     outline-style: solid;
+    transition: 0.1s;
   }
 
   .react-login-icon {
