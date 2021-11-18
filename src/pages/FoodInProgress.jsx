@@ -71,6 +71,7 @@ export default function FoodInProgress() {
       <div>
         <IngredientListProgress
           ingredients={ recipe }
+          tipo="meals"
           checkProgress={ checkProgress }
           setIngredientsLength={ setIngredientsLength }
           // setIsFinished={ setIsFinished }

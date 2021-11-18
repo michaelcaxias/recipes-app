@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 
-export default function Checkbox({ id, checkProgress }) {
+export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleChange() {
@@ -10,6 +10,24 @@ export default function Checkbox({ id, checkProgress }) {
       .setItem('ingredientsInProgress', JSON
         .stringify([...JSON.parse(localStorage.getItem('ingredientsInProgress')), id]));
     checkProgress();
+    const obtProgress = localStorage.getItem('inProgressRecipes');
+    const stringProgress = JSON.parse(obtProgress);
+    if (tipo === 'meals') {
+      const objMeals = stringProgress.meals[ingredient.idMeal];
+      objMeals.push(ingredient[id]);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...stringProgress,
+        meals: {
+          ...stringProgress.meals, [ingredient.idMeal]: [...objMeals] } }));
+    }
+    if (tipo === 'cocktails') {
+      const objDrink = stringProgress.cocktails[ingredient.idDrink];
+      objDrink.push(ingredient[id]);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...stringProgress,
+        cocktails: {
+          ...stringProgress.cocktails, [ingredient.idDrink]: [...objDrink] } }));
+    }
   }
 
   return (
@@ -26,4 +44,6 @@ export default function Checkbox({ id, checkProgress }) {
 Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   checkProgress: PropTypes.func.isRequired,
+  ingredient: PropTypes.shape(Object(any)).isRequired,
+  tipo: PropTypes.string.isRequired,
 };
