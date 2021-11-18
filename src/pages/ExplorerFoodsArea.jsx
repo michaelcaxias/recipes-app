@@ -13,21 +13,22 @@ export default function ExplorerFoodsArea() {
   const [area, setAreas] = useState([]);
   const [filteredMealsArea, setFilteredMealsArea] = useState([]);
 
-  const filterByArea = (areaToFilter) => {
+  const filterByArea = async (areaToFilter) => {
     if (areaToFilter === 'All') {
       setFilteredMealsArea(meals);
     } else {
-      const filter = meals.filter((meal) => meal.strArea === areaToFilter);
-      setFilteredMealsArea(filter);
+      const request = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${areaToFilter}`);
+      const response = await request.json();
+      setFilteredMealsArea(response.meals);
     }
   };
 
   useEffect(() => {
     const getAreas = async () => {
       try {
-        const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
-        const result = await response.json();
-        const mapAreas = (result.meals).map((areaObject) => areaObject.strArea);
+        const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+        const response = await request.json();
+        const mapAreas = (response.meals).map((areaObject) => areaObject.strArea);
         setAreas(['All'].concat(mapAreas));
         setFilteredMealsArea(meals);
       } catch (error) {

@@ -40,6 +40,8 @@ export default function FoodId() {
     history.push(`/comidas/${id}/in-progress`);
   };
 
+  // 'https://www.themealdb.com/api/json/v1/1/search.php?s='
+
   useEffect(() => {
     async function requestID() {
       const UrlID = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
