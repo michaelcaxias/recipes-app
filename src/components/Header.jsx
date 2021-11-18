@@ -9,6 +9,7 @@ import '../styles/header.css';
 export default function Header({ title, searchButton = true }) {
   const [isVisible, setIsVisible] = useState(false);
   const history = useHistory();
+
   const searchButtonElement = (
     <button
       type="button"
@@ -29,7 +30,9 @@ export default function Header({ title, searchButton = true }) {
         <h1 data-testid="page-title">{ title }</h1>
         { searchButton && searchButtonElement }
       </header>
-      { isVisible && <HeaderSearchBar />}
+      <section className={ isVisible ? 'header-search-active' : '' }>
+        <HeaderSearchBar isVisible={ isVisible } />
+      </section>
     </>
   );
 }
