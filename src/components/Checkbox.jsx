@@ -10,9 +10,6 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
       .setItem('ingredientsInProgress', JSON
         .stringify([...JSON.parse(localStorage.getItem('ingredientsInProgress')), id]));
     checkProgress();
-  }
-
-  function chek() {
     const obtProgress = localStorage.getItem('inProgressRecipes');
     const stringProgress = JSON.parse(obtProgress);
     if (tipo === 'meals') {
@@ -23,6 +20,14 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
         meals: {
           ...stringProgress.meals, [ingredient.idMeal]: [...objMeals] } }));
     }
+    if (tipo === 'cocktails') {
+      const objDrink = stringProgress.cocktails[ingredient.idDrink];
+      objDrink.push(ingredient[id]);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...stringProgress,
+        cocktails: {
+          ...stringProgress.cocktails, [ingredient.idDrink]: [...objDrink] } }));
+    }
   }
 
   return (
@@ -31,7 +36,7 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
       id={ id }
       name={ id }
       checked={ isChecked }
-      onChange={ () => chek() }
+      onChange={ () => handleChange() }
     />
   );
 }
