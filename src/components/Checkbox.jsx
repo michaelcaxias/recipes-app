@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 
 export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,7 +19,8 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
       const objMeals = stringProgress.meals[ingredient.idMeal];
       objMeals.push(ingredient[id]);
       localStorage.setItem('inProgressRecipes', JSON.stringify({
-        ...stringProgress, meals: {
+        ...stringProgress,
+        meals: {
           ...stringProgress.meals, [ingredient.idMeal]: [...objMeals] } }));
     }
   }
@@ -38,4 +39,6 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
 Checkbox.propTypes = {
   id: PropTypes.string.isRequired,
   checkProgress: PropTypes.func.isRequired,
+  ingredient: PropTypes.shape(Object(any)).isRequired,
+  tipo: PropTypes.string.isRequired,
 };
