@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { AiOutlineUser, AiOutlineUnlock } from 'react-icons/ai';
 import wave from '../images/wave';
 import '../styles/login.css';
 
@@ -37,20 +38,26 @@ export default function Login() {
   return (
     <section className="login-section">
       <form>
-        <input
-          type="email"
-          data-testid="email-input"
-          value={ email }
-          placeholder="Email"
-          onChange={ ({ target: { value } }) => setEmail(value) }
-        />
-        <input
-          type="password"
-          data-testid="password-input"
-          value={ password }
-          placeholder="Senha"
-          onChange={ ({ target: { value } }) => setPassword(value) }
-        />
+        <section className="input-section">
+          <AiOutlineUser className="react-login-icon" />
+          <input
+            type="email"
+            data-testid="email-input"
+            value={ email }
+            placeholder="Email"
+            onChange={ ({ target: { value } }) => setEmail(value) }
+          />
+        </section>
+        <section className="input-section">
+          <AiOutlineUnlock className="react-login-icon" />
+          <input
+            type="password"
+            data-testid="password-input"
+            value={ password }
+            placeholder="Senha"
+            onChange={ ({ target: { value } }) => setPassword(value) }
+          />
+        </section>
         <button
           type="button"
           data-testid="login-submit-btn"
