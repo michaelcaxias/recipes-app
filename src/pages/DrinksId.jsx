@@ -92,7 +92,11 @@ export default function DrinksId() {
   }
 
   if (!drinkId) {
-    return <Loading />;
+    return (
+      <section style={ { height: '80vh' } }>
+        <Loading />
+      </section>
+    );
   }
 
   return (
