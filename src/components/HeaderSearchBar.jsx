@@ -26,7 +26,7 @@ export default function HeaderSearchBar() {
   return (
     <header className="header-search-bar">
       <input
-        type="text"
+        type="search"
         id="search-input"
         placeholder="Buscar Receita"
         data-testid="search-input"
