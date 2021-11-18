@@ -48,7 +48,7 @@ export default function DrinksInProgress() {
         <span data-testid="recipe-category">{recipe.strCategory}</span>
       </div>
       <div>
-        <IngredientListProgress ingredients={ recipe } />
+        <IngredientListProgress ingredients={ recipe } tipo="cocktails" />
       </div>
       <div>
         <p data-testid="instructions">{ recipe.strInstructions }</p>

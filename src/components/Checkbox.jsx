@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Checkbox({ id, checkProgress }) {
+export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleChange() {
@@ -12,13 +12,23 @@ export default function Checkbox({ id, checkProgress }) {
     checkProgress();
   }
 
+  function chek() {
+    const obtProgress = localStorage.getItem('inProgressRecipes');
+    const stringProgress = JSON.parse(obtProgress);
+    if (tipo === 'meals') {
+      const objMeals = stringProgress.meals[ingredient.idMeal];
+      objMeals.push(ingredient[id]);
+      localStorage.setItem('inProgressRecipes', JSON.stringify({...stringProgress, meals: {...stringProgress.meals, [ingredient.idMeal]: [...objMeals] }}))
+    }
+  }
+
   return (
     <input
       type="checkbox"
       id={ id }
       name={ id }
       checked={ isChecked }
-      onChange={ () => handleChange() }
+      onChange={ () => chek() }
     />
   );
 }
