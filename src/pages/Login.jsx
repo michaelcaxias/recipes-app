@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { AiOutlineUser, AiOutlineUnlock } from 'react-icons/ai';
 import wave from '../images/wave';
+import logo from '../images/Logo.svg';
 import '../styles/login.css';
 
 const localStorageSetItem = (key, initialValue) => {
@@ -33,7 +34,7 @@ export default function Login() {
   const MAX_LENGTH = 6;
   const disabled = password.length > MAX_LENGTH && isEmailValid(email);
   return (
-    <>
+    <section className="login-desktop-mobile">
       <section className="login-section">
         <form className="forms">
           <section className="input-section">
@@ -72,8 +73,8 @@ export default function Login() {
         </div>
       </section>
       <section className="login-aside-desktop">
-        <p>a</p>
+        <img src={ logo } alt="logo recipes app" />
       </section>
-    </>
+    </section>
   );
 }

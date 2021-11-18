@@ -1,12 +1,23 @@
-/* @media screen and ( max-width : 360px ) { */
+.login-desktop-mobile {
+  display: flex;
+}
+
 .login-aside-desktop {
+  align-items: center;
   background-color: rgb(53, 46, 46);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-aside-desktop img {
+  width: 30%;
 }
 
 .login-section {
   background-image: linear-gradient(to top, rgb(255, 187, 187), var(--main-color));
   height: 100vh;
-  width: 40%;
+  width: 65%;
 }
 
 .forms {
@@ -45,6 +56,7 @@ form input {
   border: none;
   border-radius: 16px;
   color: rgb(51, 51, 51);
+  width: 100%;
 }
 
 
@@ -63,24 +75,44 @@ form button:enabled {
 }
 
 .custom-shape-divider-bottom-1636461259 {
-  animation: left-to-rigth 0.5s ease;
-  bottom: 0;
-  left: 0;
-  line-height: 0;
-  overflow: hidden;
-  position: absolute;
-  width: 100%;
+  display: none;
 }
 
-.custom-shape-divider-bottom-1636461259 svg {
-  display: block;
-  height: 150px;
-  position: relative;
-  width: calc(100% + 1.3px);
-}
+@media screen and ( max-width : 600px ) {
 
-.custom-shape-divider-bottom-1636461259 .shape-fill {
-  fill: var(--white-color);
+  .login-aside-desktop {
+    display: none;
+  }
+
+  .login-section {
+    width: 100%;
+  }
+
+  .react-login-icon {
+    font-size: 1.5rem;
+  }
+
+  .custom-shape-divider-bottom-1636461259 {
+    animation: left-to-rigth 0.5s ease;
+    bottom: 0;
+    display: block;
+    left: 0;
+    line-height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+  }
+
+  .custom-shape-divider-bottom-1636461259 svg {
+    display: block;
+    height: 150px;
+    position: relative;
+    width: calc(100% + 1.3px);
+  }
+
+  .custom-shape-divider-bottom-1636461259 .shape-fill {
+    fill: var(--white-color);
+  }
 }
 
 @keyframes appear {
