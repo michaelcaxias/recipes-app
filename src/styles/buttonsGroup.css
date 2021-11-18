@@ -1,0 +1,18 @@
+.buttons-group {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 80vh;
+  justify-content: center;
+}
+
+.buttons-group button {
+  background-color: rgb(255, 70, 70);
+  border: none;
+  border-radius: 20px;
+  color: white;
+  font-size: large;
+  padding: 0.5rem;
+  width: 50vh;
+}

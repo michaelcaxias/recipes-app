@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import recipesContext from '../context/recipesContext';
 import '../styles/headerSearchBar.css';
 
-export default function HeaderSearchBar() {
+export default function HeaderSearchBar({ isVisible }) {
   const initialSearch = {
     query: '',
     searchFor: '',
@@ -26,14 +27,15 @@ export default function HeaderSearchBar() {
   return (
     <header className="header-search-bar">
       <input
-        type="text"
+        type="search"
         id="search-input"
+        className="search-input"
         placeholder="Buscar Receita"
-        data-testid="search-input"
+        data-testid={ isVisible ? 'search-input' : '' }
         name="query"
         onChange={ handleChange }
       />
-      <section>
+      <section className="checkboxs-header">
         <label htmlFor="ingredient-radio">
           Ingrediente
           <input
@@ -79,3 +81,7 @@ export default function HeaderSearchBar() {
     </header>
   );
 }
+
+HeaderSearchBar.propTypes = {
+  isVisible: PropTypes.string.isRequired,
+};

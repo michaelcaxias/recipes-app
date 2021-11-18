@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import FooterMenu from '../components/FooterMenu';
 import Header from '../components/Header';
+import '../styles/buttonsGroup.css';
 
 export default function ExplorerDrinks() {
   const history = useHistory();
@@ -16,20 +17,22 @@ export default function ExplorerDrinks() {
   return (
     <section>
       <Header title="Explorar Bebidas" searchButton={ false } />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/explorar/bebidas/ingredientes') }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ handleSurpriseButton }
-      >
-        Me Surpreenda!
-      </button>
+      <section className="buttons-group">
+        <button
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push('/explorar/bebidas/ingredientes') }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ handleSurpriseButton }
+        >
+          Me Surpreenda!
+        </button>
+      </section>
       <FooterMenu />
     </section>
   );

@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+.card {
+  margin: 0.5rem;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;

@@ -1,47 +1,101 @@
-@media screen and ( max-width : 360px ) {
+.login-desktop-mobile {
+  display: flex;
+}
+
+.login-aside-desktop {
+  align-items: center;
+  background-color: rgb(53, 46, 46);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.login-aside-desktop img {
+  width: 30%;
+}
+
+.login-section {
+  background-image: linear-gradient(to top, rgb(255, 187, 187), var(--main-color));
+  height: 100vh;
+  width: 65%;
+}
+
+.forms {
+  align-items: center;
+  animation: appear 0.8s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.input-section {
+  align-items: center;
+  background-color: var(--white-color);
+  border: none;
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1em;
+  padding: 8px;
+  width: 60%;
+}
+
+.input-section:focus-within {
+  outline-color: rgb(255, 70, 70);
+  outline-style: solid;
+  transition: 0.1s;
+}
+
+.react-login-icon {
+  font-size: 1.5rem;
+}
+
+form input {
+  background-color: var(--white-color);
+  border: none;
+  border-radius: 16px;
+  color: rgb(51, 51, 51);
+  width: 100%;
+}
+
+
+form button {
+  border: none;
+  border-radius: 20px;
+  color: rgba(51, 51, 51, 0.5);
+  padding: 8px;
+  transition: 300ms;
+  width: 60%;
+}
+
+form button:enabled {
+  background-color: rgb(255, 70, 70);
+  color: var(--white-color);
+}
+
+.custom-shape-divider-bottom-1636461259 {
+  display: none;
+}
+
+@media screen and ( max-width : 600px ) {
+
+  .login-aside-desktop {
+    display: none;
+  }
 
   .login-section {
-    background-image: linear-gradient(to top, rgb(255, 187, 187), var(--main-color));
-    height: 640px;
-    width: 360px;
+    width: 100%;
   }
 
-  form {
-    align-items: center;
-    animation: appear 0.8s ease;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-  }
-
-  form input {
-    background-color: var(--white-color);
-    border: none;
-    border-radius: 16px;
-    color: rgb(51, 51, 51);
-    margin-bottom: 1em;
-    padding: 8px;
-    width: 60%;
-  }
-
-  form button {
-    border: none;
-    border-radius: 20px;
-    color: rgba(51, 51, 51, 0.5);
-    padding: 8px;
-    transition: 300ms;
-    width: 60%;
-  }
-
-  form button:enabled {
-    background-color: rgb(255, 70, 70);
-    color: var(--white-color);
+  .react-login-icon {
+    font-size: 1.5rem;
   }
 
   .custom-shape-divider-bottom-1636461259 {
     animation: left-to-rigth 0.5s ease;
     bottom: 0;
+    display: block;
     left: 0;
     line-height: 0;
     overflow: hidden;
@@ -59,13 +113,13 @@
   .custom-shape-divider-bottom-1636461259 .shape-fill {
     fill: var(--white-color);
   }
+}
 
-  @keyframes appear {
+@keyframes appear {
 
-    0% { opacity: 0%; }
+  0% { opacity: 0%; }
 
-    100% { opacity: 100%; }
-  }
+  100% { opacity: 100%; }
 }
 
 @keyframes left-to-rigth {
