@@ -1,0 +1,16 @@
+.ingredients-list-progress {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-container {
+  align-items: center;
+  display: flex;
+  justify-content: baseline;
+  text-align: center;
+}
+
+.checked-list {
+  text-decoration: line-through;
+}
+

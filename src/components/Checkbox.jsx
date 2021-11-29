@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes, { any } from 'prop-types';
+import '../styles/ingredientListProgress.css';
 
-export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
+export default function Checkbox(
+  { id, checkProgress, ingredient, tipo, ingredientMeasureKeys, index },
+) {
   const [isChecked, setIsChecked] = useState(false);
 
   function handleChange() {
@@ -31,13 +34,26 @@ export default function Checkbox({ id, checkProgress, ingredient, tipo }) {
   }
 
   return (
-    <input
-      type="checkbox"
-      id={ id }
-      name={ id }
-      checked={ isChecked }
-      onChange={ () => handleChange() }
-    />
+    <label
+      htmlFor={ id }
+      key={ id }
+      className="checkbox-container"
+      data-testid={ `${index}-ingredient-step` }
+    >
+      <input
+        type="checkbox"
+        id={ id }
+        name={ id }
+        checked={ isChecked }
+        onChange={ () => handleChange() }
+      />
+      <p
+        className={ isChecked && 'checked-list' }
+      >
+        { `${ingredient[id]} - ${ingredient[ingredientMeasureKeys[index]]}` }
+
+      </p>
+    </label>
   );
 }
 
@@ -46,4 +62,6 @@ Checkbox.propTypes = {
   checkProgress: PropTypes.func.isRequired,
   ingredient: PropTypes.shape(Object(any)).isRequired,
   tipo: PropTypes.string.isRequired,
+  ingredientMeasureKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  index: PropTypes.number.isRequired,
 };

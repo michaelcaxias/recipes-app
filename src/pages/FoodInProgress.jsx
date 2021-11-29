@@ -80,6 +80,7 @@ export default function FoodInProgress() {
       </div>
       <button
         type="button"
+        className="btnStartRecipe"
         data-testid="finish-recipe-btn"
         disabled={ !isFinished }
       >

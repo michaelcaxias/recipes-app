@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
+import '../styles/ingredientListProgress.css';
 
 export default
 function IngredientListProgress({
@@ -17,23 +18,17 @@ function IngredientListProgress({
   }, []);
 
   return (
-    <ul>
+    <ul className="ingredients-list-progress">
       { ingredientsKeys.map((key, index) => (
         ingredients[key] && (
-          <label
-            htmlFor={ key }
-            key={ key }
-            data-testid={ `${index}-ingredient-step` }
-          >
-            <Checkbox
-              id={ key }
-              checkProgress={ checkProgress }
-              ingredient={ ingredients }
-              tipo={ tipo }
-              // setIsFinished={ setIsFinished }
-            />
-            { `${ingredients[key]} - ${ingredients[ingredientMeasureKeys[index]]}` }
-          </label>
+          <Checkbox
+            id={ key }
+            checkProgress={ checkProgress }
+            ingredientMeasureKeys={ ingredientMeasureKeys }
+            index={ index }
+            ingredient={ ingredients }
+            tipo={ tipo }
+          />
         )))}
     </ul>
   );
