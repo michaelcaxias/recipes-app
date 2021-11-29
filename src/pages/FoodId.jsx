@@ -97,7 +97,11 @@ export default function FoodId() {
   }
 
   if (!foodId) {
-    return <Loading />;
+    return (
+      <section style={ { height: '80vh' } }>
+        <Loading />
+      </section>
+    );
   }
 
   return (

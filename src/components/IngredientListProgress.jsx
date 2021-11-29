@@ -18,7 +18,6 @@ function IngredientListProgress({
 
   return (
     <ul>
-      {console.log(ingredientsKeys.length)}
       { ingredientsKeys.map((key, index) => (
         ingredients[key] && (
           <label

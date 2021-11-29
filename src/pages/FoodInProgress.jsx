@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import IngredientListProgress from '../components/IngredientListProgress';
-// import recipesContext from '../context/recipesContext';
 import Loading from '../components/Loading';
 import ShareButton from '../components/ShareButton';
+import '../styles/foodAndDrinksDetails.css';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function FoodInProgress() {
   const [recipe, setRecipe] = useState();
@@ -30,65 +31,60 @@ export default function FoodInProgress() {
     requestRecipe();
   }, [id]);
 
-  // if (recipe !== undefined) {
-  //   const arrayKeys = Object.keys(recipe);
-  //   setIngredietValues(arrayKeys.filter((key) => key.includes('strIngredient')));
-  // }
-
   if (!recipe) {
-    return <Loading />;
+    return (
+      <section style={ { height: '80vh' } }>
+        <Loading />
+      </section>
+    );
   }
-  // const arrayKeys = Object.keys(recipe);
-  // setIngredietValues(arrayKeys.filter((key) => key.includes('strIngredient')));
 
   function checkProgress() {
     const progress = JSON.parse(localStorage.getItem('ingredientsInProgress'));
-    console.log(progress);
-    console.log(progress.length);
     return progress.length === ingredientsLength ? setIsFinished(true) : null;
   }
 
   return (
     <section>
-      { console.log(recipe) }
-      <div>
+      <div className="container-thumb">
         <img
           data-testid="recipe-photo"
+          className="thumb-recipe"
           src={ recipe.strMealThumb }
           alt={ recipe.strMealThumb }
         />
       </div>
-      <div>
-        <h3 data-testid="recipe-title">{ recipe.strMeal }</h3>
-      </div>
-      <div>
-        <ShareButton />
-        <button type="button" data-testid="favorite-btn">Favoritos</button>
-      </div>
-      <div>
-        <span data-testid="recipe-category">{recipe.strCategory}</span>
-      </div>
-      <div>
+      <section className="header-recipe">
+        <div>
+          <span
+            data-testid="recipe-category"
+            className="category"
+          >
+            {recipe.strCategory}
+          </span>
+          <h3 data-testid="recipe-title">{ recipe.strMeal }</h3>
+        </div>
+        <div className="buttons">
+          <ShareButton />
+          <FavoriteButton favorite={ recipe } type="comida" />
+        </div>
+      </section>
+      <div className="instructions-recipe">
         <IngredientListProgress
           ingredients={ recipe }
           tipo="meals"
           checkProgress={ checkProgress }
           setIngredientsLength={ setIngredientsLength }
-          // setIsFinished={ setIsFinished }
         />
-      </div>
-      <div>
         <p data-testid="instructions">{ recipe.strInstructions }</p>
       </div>
-      <div>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          disabled={ !isFinished }
-        >
-          Finalizar receita
-        </button>
-      </div>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ !isFinished }
+      >
+        Finalizar receita
+      </button>
     </section>
   );
 }
