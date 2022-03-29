@@ -12,14 +12,24 @@ export default function FoodInProgress() {
   const [ingredientsLength, setIngredientsLength] = useState(0);
   const { id } = useParams();
 
-  if (!localStorage.getItem('ingredientsInProgress')) {
-    localStorage.setItem('ingredientsInProgress', JSON.stringify([]));
-  }
-
+  const arrayKeys = Object.keys(recipe);
+  const ingredientsKeys = arrayKeys.filter((key) => key.includes('strIngredient'))
+  .filter((key) => recipe[key] !== '');
+  const ingredientMeasureKeys = arrayKeys.filter((key) => key.includes('strMeasure'));
+  
+  
   useEffect(() => () => {
-    localStorage.removeItem('ingredientsInProgress');
-  }, []);
-
+    try {      
+      const arrayKeys = Object.keys(recipe);
+      const ingredientsKeys = arrayKeys.filter((key) => key.includes('strIngredient'))
+      .filter((key) => recipe[key] !== '');
+      localStorage.removeItem('ingredientsInProgress');
+      setIngredientsLength(ingredientsKeys.length);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [recipe]);
+  
   useEffect(() => {
     async function requestRecipe() {
       const recipeURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -31,6 +41,10 @@ export default function FoodInProgress() {
     requestRecipe();
   }, [id]);
 
+  if (!localStorage.getItem('ingredientsInProgress')) {
+    localStorage.setItem('ingredientsInProgress', JSON.stringify([]));
+  }
+  
   if (!recipe) {
     return (
       <section style={ { height: '80vh' } }>
@@ -38,7 +52,7 @@ export default function FoodInProgress() {
       </section>
     );
   }
-
+  
   function checkProgress() {
     const progress = JSON.parse(localStorage.getItem('ingredientsInProgress'));
     return progress.length === ingredientsLength ? setIsFinished(true) : null;
@@ -74,7 +88,8 @@ export default function FoodInProgress() {
           ingredients={ recipe }
           tipo="meals"
           checkProgress={ checkProgress }
-          setIngredientsLength={ setIngredientsLength }
+          ingredientsKeys={ ingredientsKeys }
+          ingredientsLength={ ingredientMeasureKeys }
         />
         <p data-testid="instructions">{ recipe.strInstructions }</p>
       </div>

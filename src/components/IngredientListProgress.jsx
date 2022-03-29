@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Checkbox from './Checkbox';
 import '../styles/ingredientListProgress.css';
@@ -6,16 +6,7 @@ import '../styles/ingredientListProgress.css';
 export default
 function IngredientListProgress({
   ingredients,
-  checkProgress, setIngredientsLength, tipo }) {
-  const arrayKeys = Object.keys(ingredients);
-  const ingredientsKeys = arrayKeys
-    .filter((key) => key.includes('strIngredient'))
-    .filter((key) => ingredients[key] !== '');
-  const ingredientMeasureKeys = arrayKeys.filter((key) => key.includes('strMeasure'));
-
-  useEffect(() => {
-    setIngredientsLength(ingredientsKeys.length);
-  }, []);
+  checkProgress, ingredientsLength, ingredientsKeys, tipo }) {
 
   return (
     <ul className="ingredients-list-progress">
@@ -24,7 +15,7 @@ function IngredientListProgress({
           <Checkbox
             id={ key }
             checkProgress={ checkProgress }
-            ingredientMeasureKeys={ ingredientMeasureKeys }
+            ingredientMeasureKeys={ ingredientsLength }
             index={ index }
             ingredient={ ingredients }
             tipo={ tipo }
@@ -40,5 +31,6 @@ IngredientListProgress.propTypes = {
   ).isRequired,
   checkProgress: PropTypes.func.isRequired,
   setIngredientsLength: PropTypes.func.isRequired,
+  ingredientsKeys: PropTypes.arrayOf([]).isRequired,
   tipo: PropTypes.string.isRequired,
 };
